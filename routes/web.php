@@ -11,16 +11,32 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+
+Route::get('/', 'HomeController@index' );
+
+
+Route::get('/projects', 'ProjectsController@index');
+Route::post('/projects', 'ProjectsController@store');
+Route::get('/projects/create', 'ProjectsController@create');
+
+Route::get('/error', 'TestController@error');
+
+Auth::routes();
+
+Route::group(['middleware' => 'auth'], function(){
+    Route::group(['middleware' => ['admin']], function(){
+        Route::get('welcome', 'TestController@index');
+    });
+
 });
 
-Route::resource('projects', 'ProjectsController');
+Route::get('/home', 'HomeController@index')->name('home');
 
-//Route::get('/projects', 'ProjectsController@index');
-//Route::post('/projects', 'ProjectsController@store');
-//Route::get('/projects/create', 'ProjectsController@create');
-//Route::get('/projects/{projects}', 'ProjectsController@show');
-//Route::get('/projects/{projects}/edit', 'ProjectsController@edit');
-//Route::patch('/projects/{projects}', 'ProjectsController@update');
-//Route::delete('/projects/{projects}', 'ProjectsController@destroy');
+Route::post('/register', 'Auth\RegisterController@register');
+
+
+
