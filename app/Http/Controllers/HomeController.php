@@ -26,4 +26,24 @@ class HomeController extends Controller
     {
         return view('profile');
     }
+
+    public function news()
+    {
+        return view('welcome-links.news');
+    }
+
+    public function faq()
+    {
+        return view('welcome-links.faq');
+    }
+
+    public function scores()
+    {
+        return view('welcome-links.scores');
+    }
+
+    public function admins()
+    {
+        return view('welcome-links.admins');
+    }
 }

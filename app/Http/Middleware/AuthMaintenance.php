@@ -20,7 +20,7 @@ class AuthMaintenance
     {
         if(Auth::check()){
 
-            if(Auth::user()->email !== 'lol@gmail.com'){
+            if(Auth::user()->email !== 'akash.soedamah@gmail.com'){
                 return redirect('/home');
             }
         }

@@ -1,4 +1,4 @@
 @extends('layouts.app')
 @section('content')
-@include('layouts.profile')
+@include('layouts.scores')
 @endsection
