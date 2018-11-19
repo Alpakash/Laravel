@@ -31,10 +31,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::group(['middleware' => ['admin']], function(){
         Route::get('welcome', 'TestController@index');
     });
-
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/profile', 'HomeController@index')->name('home');
 
 Route::post('/register', 'Auth\RegisterController@register');
 
