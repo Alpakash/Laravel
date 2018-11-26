@@ -35,6 +35,12 @@ Route::group(['middleware' => 'auth'], function(){
 
 Route::get('/profile', 'HomeController@index')->name('home');
 
+Route::get('/news', 'HomeController@news');
+Route::get('/faq', 'HomeController@faq');
+Route::get('/scores', 'HomeController@scores');
+Route::get('/admins', 'HomeController@admins');
+
+
 Route::post('/register', 'Auth\RegisterController@register');
 
 

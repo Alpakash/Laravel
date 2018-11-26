@@ -14,9 +14,10 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/r5s_vd7impvjych/videoblocks-family-playing-a-board-game-together-having-a-lot-of-fun-carcassonne_rd8pauzp2g_thumbnail-full01.png");
-                background-size: cover;
+                background-image: url("http://4.bp.blogspot.com/-MY_dJWibfm4/Vq6HldIIAoI/AAAAAAAAS2k/l3nElNBzNG8/s1600/carcassonnee-complete-road.JPG");
+                background-size: auto;
                 background-repeat: no-repeat;
+                 background-position: right;
                 color: #fff;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
@@ -68,8 +69,8 @@
             .links > a {
                 color: #fff;
                 padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
+                font-size: 18px;
+                font-weight: bold;
                 letter-spacing: .1rem;
                 text-decoration: none;
                 text-transform: uppercase;
