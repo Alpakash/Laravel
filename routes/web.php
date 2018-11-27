@@ -42,3 +42,9 @@ Route::post('/register', 'Auth\RegisterController@register');
 
 
 
+Route::get('/tableSize', 'TempController@tableSize');
+Route::get('/tournamentPoints', 'TempController@tournamentPoints');
+Route::get('/points', 'TempController@points');
+Route::get('/tablesPreliminaryRoundRandom', 'TempController@tablesPreliminaryRoundRandom');
+Route::get('/tablesPreliminaryRoundFromPoints', 'TempController@tablesPreliminaryRoundFromPoints');
+Route::get('/tablesKnockout', 'TempController@tablesKnockout');
