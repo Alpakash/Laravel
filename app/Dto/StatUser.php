@@ -44,6 +44,14 @@ class StatUser
         $this->score = $score;
     }
 
+    /**
+     * Create a StatUser object with all the properties.
+     * @param int $id The id of the user.
+     * @param int $score The score of the user.
+     * @param int $weight The weight of the user.
+     * @param int $tournamentPoints The tournament points of the user.
+     * @return StatUser The StatUser object.
+     */
     public static function create(int $id, int $score, int $weight, int $tournamentPoints)
     {
         $statUser = new StatUser($id, $score);
