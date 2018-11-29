@@ -12,20 +12,20 @@ namespace App\Dto;
 class TableSize
 {
     /**
-     * @var int $tableSize The amount of people on a table.
-     */
-    public $tableSize;
-    /**
      * @var int $amountOfBaseTableSize The amount of tables with with the size.
      */
     public $amountOfTables;
+    /**
+     * @var int $tableSize The amount of people on a table.
+     */
+    public $tableSize;
 
     /**
      * TableSize constructor.
-     * @param $tableSize int The amount of people on a table.
      * @param $amountOfTables int The amount of tables with with the size.
+     * @param $tableSize int The amount of people on a table.
      */
-    public function __construct($tableSize, $amountOfTables)
+    public function __construct($amountOfTables, $tableSize)
     {
         $this->tableSize = $tableSize;
         $this->amountOfTables = $amountOfTables;

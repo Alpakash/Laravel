@@ -20,7 +20,7 @@ class Calculation
      */
     public function tableSize(int $userCount)
     {
-        if ($userCount === 0 || $userCount === 1 || $userCount === 2)
+        if ($userCount === 0 || $userCount === 1 || $userCount === 2 || $userCount === 3)
             return [
                 new TableSize(1, $userCount)
             ];
@@ -39,12 +39,18 @@ class Calculation
         if ($mod === 1){
             $tableSize[0]->amountOfTables -= 1;
             $tableSize[] = new TableSize(1, 5);
+            if($tableSize[0]->amountOfTables === 0.0)
+                array_shift($tableSize);
         }
         else if ($mod === 2){
             $tableSize[0]->amountOfTables -= 1;
             $tableSize[] = new TableSize(2, 3);
+            if($tableSize[0]->amountOfTables === 0.0)
+                array_shift($tableSize);
         }
         else if ($mod === 3){
+            if($tableSize[0]->amountOfTables === 0.0)
+                array_shift($tableSize);
             $tableSize[] = new TableSize(1, 3);
         }
 

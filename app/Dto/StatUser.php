@@ -8,8 +8,6 @@
 
 namespace App\Dto;
 
-use vendor\project\StatusTest;
-
 /**
  * Class StatUser The class that holds the stats of a user.
  * @package App\Dto
