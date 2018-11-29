@@ -8,28 +8,46 @@
 
 namespace App;
 
-use http\Exception\InvalidArgumentException;
+use App\Dto\TableSize;
 
 class Calculation
 {
     /**
      * Calculate the amount of people on a single table.
      * @param int $userCount The amount of people in the tournament.
-     * @return int The amount of people on a single table.
+     * @return array The amount of people on a single table.
      */
     public function tableSize(int $userCount)
     {
         if ($userCount === 0 || $userCount === 1 || $userCount === 2)
-            return $userCount;
+            return [
+                new TableSize(1, $userCount)
+            ];
 
-        if ($userCount % 4 === 0)
-            return 4;
-        else if ($userCount % 3 === 0)
-            return 3;
-        else if ($userCount % 5 === 0)
-            return 5;
-        else if ($userCount % 6 === 0)
-            return 6;
+        $mod = $userCount % 4;
+
+        if ($mod === 0)
+            return [
+                new TableSize($userCount / 4, 4)
+            ];
+
+        $tableSize = [
+            new TableSize(floor($userCount / 4), 4)
+        ];
+
+        if ($mod === 1){
+            $tableSize[0]->amountOfTables -= 1;
+            $tableSize[] = new TableSize(1, 5);
+        }
+        else if ($mod === 2){
+            $tableSize[0]->amountOfTables -= 1;
+            $tableSize[] = new TableSize(2, 3);
+        }
+        else if ($mod === 3){
+            $tableSize[] = new TableSize(1, 3);
+        }
+
+        return $tableSize;
     }
 
     /**
@@ -89,9 +107,9 @@ class Calculation
     {
         $userCount = count($users);
         if ($userCount !== count($tournamentPoints))
-            throw new InvalidArgumentException('The amount of people and and the amount of points are not equal.');
+            throw new \InvalidArgumentException('The amount of people and and the amount of points are not equal.');
         else if ($userCount === 0)
-            throw new InvalidArgumentException('No users given.');
+            throw new \InvalidArgumentException('No users given.');
 
         usort($users, array($this, "scoreCompare"));
         rsort($tournamentPoints);
@@ -105,8 +123,14 @@ class Calculation
         );
 
         for ($i = 0; $i < $userCount; $i++){
-            $users[$i]->tournamentPoints = $tournamentPoints[$i];
-            $users[$i]->weight = $this->percentage($totalScore, $users[$i]->score);
+            if ($users[$i]->score === $users[$i + 1]->score){
+                $points = $tournamentPoints[$i] + $tournamentPoints[$i + 1];
+                $this->assignPoints($users, $i, $totalScore, $points);
+                $i++;
+                $this->assignPoints($users, $i, $totalScore, $points);
+            }
+            else
+                $this->assignPoints($users, $i, $totalScore, $tournamentPoints[$i]);
         }
 
         return $users;
@@ -118,12 +142,24 @@ class Calculation
      * @param Dto\StatUser $b Second user.
      * @return int Which user goes first.
      */
-    private function scoreCompare(\App\Dto\StatUser $a, \App\Dto\StatUser $b)
+    private function scoreCompare(Dto\StatUser $a, Dto\StatUser $b)
     {
         if ($a->score === $b->score)
             return 0;
 
         return ($a->score < $b->score) ? -1 : 1;
+    }
+
+    /**
+     * @param $users array The users to search in.
+     * @param $id int The index of the user to assign the points to.
+     * @param $totalScore int The total score of all the table.
+     * @param $tournamentPoint int The tournament points the user should get.
+     */
+    private function assignPoints(&$users, $id, $totalScore, $tournamentPoint)
+    {
+        $users[$id]->tournamentPoints = $tournamentPoint;
+        $users[$id]->weight = $this->percentage($totalScore, $users[$id]->score);
     }
 
     /**
@@ -146,7 +182,7 @@ class Calculation
     public function tablesPreliminaryRoundRandom(array $users, int $tableSize)
     {
         if (count($users) % $tableSize !== 0)
-            throw new InvalidArgumentException('There will be an amount of people left over with this table size.');
+            throw new \InvalidArgumentException('There will be an amount of people left over with this table size.');
 
         shuffle($users);
         return array_chunk($users, $tableSize);
@@ -162,9 +198,9 @@ class Calculation
     {
         $userCount = count($users);
         if ($userCount % $tableSize !== 0)
-            throw new InvalidArgumentException('There will be an amount of people left over with this table size.');
+            throw new \InvalidArgumentException('There will be an amount of people left over with this table size.');
         else if ($userCount === 0)
-            throw new InvalidArgumentException('No users given.');
+            throw new \InvalidArgumentException('No users given.');
 
         $users = $this->orderUsers($users);
         return array_chunk($users, $tableSize);
@@ -179,9 +215,9 @@ class Calculation
     {
         $userCount = count($users);
         if ($userCount % 2 !== 0)
-            throw new InvalidArgumentException('Not an even amount of users required for the knockout phase.');
+            throw new \InvalidArgumentException('Not an even amount of users required for the knockout phase.');
         else if ($userCount === 0)
-            throw new InvalidArgumentException('No users given.');
+            throw new \InvalidArgumentException('No users given.');
 
         $users = $this->orderUsers($users);
 
@@ -251,7 +287,7 @@ class Calculation
     private function scoreWeightCompare(\App\Dto\StatUser $a, \App\Dto\StatUser $b)
     {
         if ($a->tournamentPoints === $b->tournamentPoints)
-            return $a->score > $b->score ? -1 : 1;
+            return $a->weight > $b->weight ? -1 : 1;
         return $a->tournamentPoints > $b->tournamentPoints ? -1 : 1;
     }
 
