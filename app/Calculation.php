@@ -9,6 +9,7 @@
 namespace App;
 
 use App\Dto\TableSize;
+use App\Dto\StatUser;
 
 class Calculation
 {
@@ -115,7 +116,7 @@ class Calculation
         rsort($tournamentPoints);
 
         $totalScore = array_reduce($users,
-            function(int $i = null, \App\Dto\StatUser $user) {
+            function(int $i = null, StatUser $user) {
                 if($i === null)
                     return $user->score;
                 return $i + $user->score;
@@ -138,11 +139,11 @@ class Calculation
 
     /**
      * Compare two users based on the score.
-     * @param Dto\StatUser $a First user.
-     * @param Dto\StatUser $b Second user.
+     * @param StatUser $a First user.
+     * @param StatUser $b Second user.
      * @return int Which user goes first.
      */
-    private function scoreCompare(Dto\StatUser $a, Dto\StatUser $b)
+    private function scoreCompare(StatUser $a, StatUser $b)
     {
         if ($a->score === $b->score)
             return 0;
@@ -207,63 +208,6 @@ class Calculation
     }
 
     /**
-     * Split the users over tables for the knockout rounds.
-     * @param array $users The users to divide.
-     * @return array The tables for the knockout rounds.
-     */
-    public function tablesKnockout(array $users)
-    {
-        $userCount = count($users);
-        if ($userCount % 2 !== 0)
-            throw new \InvalidArgumentException('Not an even amount of users required for the knockout phase.');
-        else if ($userCount === 0)
-            throw new \InvalidArgumentException('No users given.');
-
-        $users = $this->orderUsers($users);
-
-        $splitUsers = $this->splitUsers($users);
-        $oddUsers = $splitUsers[0];
-        $evenUsers = $splitUsers[1];
-
-        $oddUsers = $this->splitUsers($oddUsers);
-        $evenUsers = $this->splitUsers($evenUsers);
-
-        $firstHalfOddUsers = $oddUsers[0];
-        $secondHalfOddUsers = $oddUsers[1];
-        $firstHalfEvenUsers = $evenUsers[0];
-        $secondHalfEvenUsers = $evenUsers[1];
-
-        $secondHalfOddUsers = array_reverse($secondHalfOddUsers);
-        $secondHalfEvenUsers = array_reverse($secondHalfEvenUsers);
-
-        $oddUsers = array_merge($firstHalfOddUsers, $secondHalfOddUsers);
-        $evenUsers = array_merge($firstHalfEvenUsers, $secondHalfEvenUsers);
-        $evenUsers = array_reverse($evenUsers);
-
-        $userCount = count($oddUsers);
-
-        $oddUsersTable = [];
-        $evenUsersTable = [];
-
-        for ($i = 0; $i < $userCount; $i += 2){
-            $oddUsersTable[] = [
-                $oddUsers[$i],
-                $oddUsers[$i + 1]
-            ];
-
-            $evenUsersTable[] = [
-                $evenUsers[$i],
-                $evenUsers[$i + 1]
-            ];
-        }
-
-        return [
-            $oddUsersTable,
-            $evenUsersTable
-        ];
-    }
-
-    /**
      * Sort users based on the score and weight.
      * @param array $users The users to sort.
      * @return array The sorted users.
@@ -284,7 +228,7 @@ class Calculation
      * @param Dto\StatUser $b Second user.
      * @return int Which user goes first.
      */
-    private function scoreWeightCompare(\App\Dto\StatUser $a, \App\Dto\StatUser $b)
+    private function scoreWeightCompare(Dto\StatUser $a, Dto\StatUser $b)
     {
         if ($a->tournamentPoints === $b->tournamentPoints)
             return $a->weight > $b->weight ? -1 : 1;
@@ -292,25 +236,20 @@ class Calculation
     }
 
     /**
-     * Place every other user in a separate array.
-     * @param array $users The users to split.
-     * @return array Nested array of each half of the users.
+     * Split the users over tables for the knockout rounds.
+     * @param array $users The users to divide.
+     * @return array The tables for the knockout rounds.
      */
-    private function splitUsers(array $users)
+    public function tablesKnockout(array $users)
     {
-        $firstHalf = [];
         $userCount = count($users);
-        for($i = 0; $i < $userCount; $i += 2)
-        {
-            $firstHalf[] = $users[$i];
-            unset($users[$i]);
-        }
+        if ($userCount % 2 !== 0)
+            throw new \InvalidArgumentException('Not an even amount of users required for the knockout phase.');
+        else if ($userCount === 0)
+            throw new \InvalidArgumentException('No users given.');
 
-        $secondHalf = array_values($users);
+        shuffle($users);
 
-        return [
-            $firstHalf,
-            $secondHalf
-        ];
+        return array_chunk($users, 2);
     }
 }
