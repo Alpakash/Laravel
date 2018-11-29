@@ -1,0 +1,59 @@
+body {
+    background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/r5s_vd7impvjych/videoblocks-family-playing-a-board-game-together-having-a-lot-of-fun-carcassonne_rd8pauzp2g_thumbnail-full01.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.profileLabel {
+  display: block;
+}
+
+.gameFont {
+  font-family: 'Limoges',
+  'Nunito',
+  sans-serif;
+  ;
+}
+
+.profileIcon {
+  font-size: 40px;
+  display: flex;
+  float: right;
+}
+
+.profileIcon:hover {
+  color: #aa0f00;
+}
+
+.cardBorder:hover {
+  border-color: #e13013;
+}
+
+.btn-danger {
+  background-color: #e13013;
+}
+
+.btn-danger:hover {
+  background-color: #aa0f00;
+}
+
+.btn-warning {
+  background-color: #fe9b27;
+}
+
+@media screen and (min-width: 992px) {
+.profileIcon { 
+  margin-right: 20%;
+}
+
+.profileLabel {
+  margin-left: 20%;
+}
+}
+
+.cardBorder {
+  border: 1px rgba(128, 128, 128, 0.4) solid;
+  border-radius: 5px;
+  padding: 20px 10px 0px 10px;
+  margin-bottom: 20px;
+}
