@@ -41,49 +41,7 @@
 
                     </ul>
                     <!-- Countdown Timer JavaScript-->
-                    <script>
-        window.onload = () => {
-            let hour = 00;
-            let minute = 00;
-            let seconds = 00;
-            let totalSeconds = 2700;
-            let intervalId = null;
-            function startTimer() {
-                --totalSeconds;
-                minute = Math.floor((totalSeconds - hour * 3600) / 60);
-                seconds = totalSeconds - (hour * 3600 + minute * 60);
-
-                document.getElementById("minute").innerHTML = minute;
-                document.getElementById("seconds").innerHTML = seconds;
-            }
-            document.getElementById('start-btn').addEventListener('click', () => {
-                intervalId = setInterval(startTimer, 1000);
-            })
-            document.getElementById('stop-btn').addEventListener('click', () => {
-                if (intervalId)
-                    clearInterval(intervalId);
-            });
-            document.getElementById('reset-btn').addEventListener('click', () => {
-                totalSeconds = 2700;
-                document.getElementById("minute").innerHTML = '00';
-                document.getElementById("seconds").innerHTML = '00';
-            });
-        }
-    </script>
-
-
-<!-- Display Countdown Timer -->
-
-
-<span id="minute">00</span>:<span id="seconds" style="margin-right: 5px;">00</span>
-            
-            <div>
-            <button id="start-btn" class="btn btn-success btn-sm">Start game</button>
-            <button id="stop-btn" class="btn btn-warning btn-sm">Pause game</button>
-            <button id="reset-btn" class="btn btn-danger btn-sm">Reset time</button>
-            </div>
- <!-- End of the timer -->
-              
+                        @include('layouts.countdown')             
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -100,7 +58,7 @@
                         @else
                         
                         <li class="nav-item">
-                             <a href="/welcome"><button class="btn btn-danger mr-3"> Carcassonne Insights</button></a>
+                             <a href="welcome"><button class="btn btn-danger mr-3"> Carcassonne Insights</button></a>
                         </li>
                             <li class="nav-item dropdown">                  
                                 <a id="navbarDropdown" class=" dropdown-toggle btn btn-warning" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -110,16 +68,16 @@
             
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                     <a class="dropdown-item" href="/news">
+                                     <a class="dropdown-item" href="news">
                                       <i class="far fa-newspaper"></i>  News
                                     </a>
-                                     <a class="dropdown-item" href="/faq">
+                                     <a class="dropdown-item" href="faq">
                                        <i class="fas fa-question"></i> FAQ
                                     </a>
-                                     <a class="dropdown-item" href="/scores">
+                                     <a class="dropdown-item" href="scores">
                                       <i class="far fa-star"></i>  Scores
                                     </a>
-                                     <a class="dropdown-item" href="/admins">
+                                     <a class="dropdown-item" href="admins">
                                        <i class="fas fa-crown"></i> Admins
                                     </a>
 

@@ -15,6 +15,7 @@ class TestController extends Controller
         return view('welcome');
     }
 
+
     public function error()
     {
         return view('errors.503');

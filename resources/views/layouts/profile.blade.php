@@ -40,7 +40,7 @@
        </div>
     </div>
 
-    <center><a href='/welcome'><button class="btn btn-danger form-control">Watch Carcassonne Insights</button></a></center>
+    <center><a href='welcome'><button class="btn btn-danger form-control">Watch Carcassonne Insights</button></a></center>
 
                 </div>
             </div>
