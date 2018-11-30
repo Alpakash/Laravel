@@ -43,5 +43,6 @@ Route::get('/admins', 'HomeController@admins');
 
 Route::post('/register', 'Auth\RegisterController@register');
 
+Route::resource('/judge','JudgeController');
 
 
