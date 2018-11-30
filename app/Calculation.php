@@ -112,6 +112,7 @@ class Calculation
      */
     public function points(array $users, array $tournamentPoints)
     {
+        //If absences place last
         $userCount = count($users);
         if ($userCount !== count($tournamentPoints))
             throw new \InvalidArgumentException('The amount of people and and the amount of points are not equal.');
@@ -183,34 +184,130 @@ class Calculation
     /**
      * Split the users over tables with a random layout.
      * @param array $users The users to split over each table.
-     * @param int $tableSize The size of each table.
+     * @param array $tableSizes The size of each table.
      * @return array The users of each table.
      */
-    public function tablesPreliminaryRoundRandom(array $users, int $tableSize)
+    public function tablesPreliminaryRoundRandom(array $users, array $tableSizes)
     {
-        if (count($users) % $tableSize !== 0)
+        $availableSpace = 0;
+        foreach ($tableSizes as $tableSize){
+            $availableSpace += $tableSize->amountOfTables * $tableSize->tableSize;
+        }
+
+        if (count($users) !== $availableSpace)
             throw new \InvalidArgumentException('There will be an amount of people left over with this table size.');
 
         shuffle($users);
-        return array_chunk($users, $tableSize);
+
+        return $this->defineTables($users, $tableSizes);
     }
 
     /**
      * Split the users over each table.
      * @param array $users The users to split over each table.
-     * @param int $tableSize The size of each table.
+     * @param array $tableSizes The size of each table.
      * @return array The users for each table.
      */
-    public function tablesPreliminaryRoundFromPoints(array $users, int $tableSize)
+    public function tablesPreliminaryRoundFromPoints(array $users, array $tableSizes)
+    {
+        $availableSpace = 0;
+        foreach ($tableSizes as $tableSize){
+            $availableSpace += $tableSize->amountOfTables * $tableSize->tableSize;
+        }
+        
+        $userCount = count($users);
+        if ($userCount === 0)
+            throw new \InvalidArgumentException('No users given.');
+        else if ($userCount != $availableSpace)
+            throw new \InvalidArgumentException('There will be an amount of people left over with this table size.');
+
+
+        $users = $this->orderUsers($users);
+
+        return $this->defineTables($users, $tableSizes);
+    }
+
+    /**
+     * Divide users over the tables with the divide sizes.
+     * @param array $users The users to divide.
+     * @param array $tableSizes The table sizes.
+     * @return array The users divided in tables.
+     */
+    private function defineTables(array $users, array $tableSizes)
+    {
+        $start = 0;
+        $tables = [];
+        foreach ($tableSizes as $tableSize){
+            $totalTableSize = $tableSize->amountOfTables * $tableSize->tableSize;
+            $separateUser = array_slice($users, $start, $totalTableSize);
+            $start += $totalTableSize;
+            $table = array_chunk($separateUser, $tableSize->tableSize);
+            $tables = array_merge($tables, $table);
+        }
+
+        return $tables;
+    }
+
+    /**
+     * Split the users over tables for the knockout rounds.
+     * @param array $users The users to divide.
+     * @return array The tables for the knockout rounds.
+     */
+    public function tablesKnockout(array $users)
     {
         $userCount = count($users);
-        if ($userCount % $tableSize !== 0)
-            throw new \InvalidArgumentException('There will be an amount of people left over with this table size.');
+        if ($userCount % 2 !== 0)
+            throw new \InvalidArgumentException('Not an even amount of users required for the knockout phase.');
         else if ($userCount === 0)
             throw new \InvalidArgumentException('No users given.');
 
+        if ($userCount > 16){
+            $users = $this->orderUsers($users);
+            $users = array_slice($users, 0, 16);
+        }
+
         $users = $this->orderUsers($users);
-        return array_chunk($users, $tableSize);
+
+        $splitUsers = $this->splitUsers($users);
+        $oddUsers = $splitUsers[0];
+        $evenUsers = $splitUsers[1];
+
+        $oddUsers = $this->splitUsers($oddUsers);
+        $evenUsers = $this->splitUsers($evenUsers);
+
+        $firstHalfOddUsers = $oddUsers[0];
+        $secondHalfOddUsers = $oddUsers[1];
+        $firstHalfEvenUsers = $evenUsers[0];
+        $secondHalfEvenUsers = $evenUsers[1];
+
+        $secondHalfOddUsers = array_reverse($secondHalfOddUsers);
+        $secondHalfEvenUsers = array_reverse($secondHalfEvenUsers);
+
+        $oddUsers = array_merge($firstHalfOddUsers, $secondHalfOddUsers);
+        $evenUsers = array_merge($firstHalfEvenUsers, $secondHalfEvenUsers);
+        $evenUsers = array_reverse($evenUsers);
+
+        $userCount = count($oddUsers);
+
+        $oddUsersTable = [];
+        $evenUsersTable = [];
+
+        for ($i = 0; $i < $userCount; $i += 2){
+            $oddUsersTable[] = [
+                $oddUsers[$i],
+                $oddUsers[$i + 1]
+            ];
+
+            $evenUsersTable[] = [
+                $evenUsers[$i],
+                $evenUsers[$i + 1]
+            ];
+        }
+
+        return [
+            $oddUsersTable,
+            $evenUsersTable
+        ];
     }
 
     /**
@@ -242,20 +339,25 @@ class Calculation
     }
 
     /**
-     * Split the users over tables for the knockout rounds.
-     * @param array $users The users to divide.
-     * @return array The tables for the knockout rounds.
+     * Place every other user in a separate array.
+     * @param array $users The users to split.
+     * @return array Nested array of each half of the users.
      */
-    public function tablesKnockout(array $users)
+    private function splitUsers(array $users)
     {
+        $firstHalf = [];
         $userCount = count($users);
-        if ($userCount % 2 !== 0)
-            throw new \InvalidArgumentException('Not an even amount of users required for the knockout phase.');
-        else if ($userCount === 0)
-            throw new \InvalidArgumentException('No users given.');
+        for($i = 0; $i < $userCount; $i += 2)
+        {
+            $firstHalf[] = $users[$i];
+            unset($users[$i]);
+        }
 
-        shuffle($users);
+        $secondHalf = array_values($users);
 
-        return array_chunk($users, 2);
+        return [
+            $firstHalf,
+            $secondHalf
+        ];
     }
 }

@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class TempController extends Controller
 {
     public function tableSize()
@@ -15,7 +13,7 @@ class TempController extends Controller
     public function tournamentPoints()
     {
         $calculation = new \App\Calculation();
-        dd($calculation->tournamentPoints(1));
+        dd($calculation->tournamentPoints(5));
     }
 
     public function points()
@@ -45,9 +43,10 @@ class TempController extends Controller
             \App\Dto\StatUser::create(0, 99, 20, 33),
             \App\Dto\StatUser::create(0, 50, 20, 33),
             \App\Dto\StatUser::create(0, 70, 20, 33),
+            \App\Dto\StatUser::create(0, 30, 40, 60),
             \App\Dto\StatUser::create(0, 40, 20, 33),
         ],
-            4));
+            $calculation->tableSize(13)));
     }
 
     public function tablesPreliminaryRoundFromPoints()
@@ -65,9 +64,10 @@ class TempController extends Controller
             \App\Dto\StatUser::create(0, 99, 20, 33),
             \App\Dto\StatUser::create(0, 50, 20, 33),
             \App\Dto\StatUser::create(0, 70, 20, 33),
+            \App\Dto\StatUser::create(0, 30, 40, 60),
             \App\Dto\StatUser::create(0, 40, 20, 33),
         ],
-            4));
+            $calculation->tableSize(13)));
     }
 
     public function tablesKnockout()
