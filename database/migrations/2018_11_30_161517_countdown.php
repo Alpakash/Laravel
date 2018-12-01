@@ -15,7 +15,8 @@ class Countdown extends Migration
     {
         Schema::create('countdown', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('minutes');
+            $table->unsignedInteger('duration');
+            $table->timestamp('paused_at');
             $table->timestamps();
             });
     }
@@ -27,6 +28,6 @@ class Countdown extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('countdown');
     }
 }

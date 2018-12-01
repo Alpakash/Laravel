@@ -1,71 +1,73 @@
-<?php 
-session_start();
+<p id="countdown"></p>
+
+<?php
+date_default_timezone_set('Europe/Amsterdam');
 // Get the countdown table, reverse and get the row of the top (lastRow)
-$countdown = DB::table('countdown')->orderBy('created_at', 'desc')->first();
+$countdown = DB::table('countdown')->first();
 
-// countdown timer,
-$duration = $countdown->minutes;
-$_SESSION["duration"] = $duration;
-$_SESSION["start_time"]=date("Y-m-d H:i:s");
+// Get the integer in the mySQL db
 
-$end_time = $end_time=date('Y-m-d H:i:s', strtotime('+'.$_SESSION["duration"].'minutes', strtotime($_SESSION["start_time"])));
+$minutes = $countdown->duration;
 
-$_SESSION["end_time"]=$end_time;
+$paused_at = $countdown->paused_at;
 
 
+$currentTime = strtotime(date($paused_at, strtotime('now' . '+' . $minutes . ' minutes')));
 ?>
 
-<div id="response"></div>
-
-<script type="text/javascript">
-setInterval(function() {
-    var xmlhttp=new XMLHttpRequest();
-    xmlhttp.open("GET", "response.php", false);
-    xmlhttp.send(null);
-    document.getElementById("response").innerHTML=xmlhttp.reponseText;
-},1000);
-</script>
 
 
-<script>
-        window.onload = () => {
-            let hour = 00;
-            let minute = 00;
-            let seconds = 00;
-            let totalSeconds = 2700;
-            let intervalId = null;
-            function startTimer() {
-                --totalSeconds;
-                minute = Math.floor((totalSeconds - hour * 3600) / 60);
-                seconds = totalSeconds - (hour * 3600 + minute * 60);
 
-                document.getElementById("minute").innerHTML = minute;
-                document.getElementById("seconds").innerHTML = seconds;
-            }
-            document.getElementById('start-btn').addEventListener('click', () => {
-                intervalId = setInterval(startTimer, 1000);
-            })
-            document.getElementById('stop-btn').addEventListener('click', () => {
-                if (intervalId)
-                    clearInterval(intervalId);
-            });
-            document.getElementById('reset-btn').addEventListener('click', () => {
-                totalSeconds = 2700;
-                document.getElementById("minute").innerHTML = '00';
-                document.getElementById("seconds").innerHTML = '00';
-            });
+    <script>
+    // Set the date we're counting down to
+    var countDownDate = <?php echo $currentTime ?> * 1000;
+    var now = <?php echo time() ?> * 1000;
+
+    // Update the count down every 1 second
+    var x = setInterval(function() {
+
+        // Get todays date and time
+        now = now + 1000;
+
+        // Find the distance between now an the count down date
+        var distance = countDownDate - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Output the result in an element with id="demo"
+        document.getElementById("countdown").innerHTML = "<strong>Tijd over: </strong>" +
+            minutes + ":" + seconds;
+
+        // If the count down is over, write some text 
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("countdown").innerHTML = "Einde ronde!";
         }
-    </script>
+    }, 1000);
+    </script>    
+
 
 
 <!-- Display Countdown Timer -->
-
-
-<span id="minute">00</span>:<span id="seconds" style="margin-right: 5px;">00</span>
             
             <div>
-            <button id="start-btn" class="btn btn-success btn-sm">Start game</button>
-            <button id="stop-btn" class="btn btn-warning btn-sm">Pause game</button>
-            <button id="reset-btn" class="btn btn-danger btn-sm">Reset time</button>
+                <form action="cdcreate" method="post">
+                {{ csrf_field() }}
+
+                <button id="start-btn" class="btn btn-success btn-sm">Start game</button>
+                </form>
+
+                <form action="cdpause" method="post">
+                {{ csrf_field() }}
+
+                <button id="stop-btn" class="btn btn-warning btn-sm">Pause game</button>
+                </form>
+
+                <form action="cdupdate" method="post">
+                {{ csrf_field() }}
+
+                <button id="reset-btn" class="btn btn-danger btn-sm">Reset time</button>
+                </form>
             </div> 
-   

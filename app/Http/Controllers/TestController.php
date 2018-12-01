@@ -15,6 +15,11 @@ class TestController extends Controller
         return view('welcome');
     }
 
+    public function response()
+    {
+        return view('layouts.countdown');
+    }
+
 
     public function error()
     {

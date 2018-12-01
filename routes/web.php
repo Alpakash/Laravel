@@ -14,9 +14,7 @@
 
 Route::get('/', 'HomeController@index' );
 
-Route::get('projects', 'ProjectsController@index');
-Route::post('projects', 'ProjectsController@store');
-Route::get('projects/create', 'ProjectsController@create');
+Route::get('countdown', 'TestController@response');
 
 Route::get('error', 'TestController@error');
 
@@ -37,3 +35,8 @@ Route::get('admins', 'HomeController@admins');
 Route::get('mail', 'HomeController@mail');
 
 Route::post('register', 'Auth\RegisterController@register');
+
+Route::post('cdcreate', 'CountdownController@create');
+Route::post('cdpause', 'CountdownController@pause');
+Route::post('cdupdate', 'CountdownController@update');
+
