@@ -43,5 +43,12 @@ Route::get('/admins', 'HomeController@admins');
 
 Route::post('/register', 'Auth\RegisterController@register');
 
+// Admin web request
+
+Route::get('/admin/users', 'AdminController@index');
+Route::get('/admin/users/create', 'AdminController@showCreate');
+
+// Admin post request
+Route::post('/admin/users/create', 'AdminController@store');
 
 
