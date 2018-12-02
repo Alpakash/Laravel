@@ -15,9 +15,10 @@
 //    return view('welcome');
 //});
 
-
 Route::get('/', 'HomeController@index' );
-
+Route::get('/news', 'HomeController@news');
+Route::get('/faq', 'HomeController@faq');
+Route::get('/scores', 'HomeController@scores');
 
 Route::get('/projects', 'ProjectsController@index');
 Route::post('/projects', 'ProjectsController@store');
@@ -33,12 +34,8 @@ Route::group(['middleware' => 'auth'], function(){
     });
 });
 
-Route::get('/profile', 'HomeController@index')->name('home');
-
-Route::get('/news', 'HomeController@news');
-Route::get('/faq', 'HomeController@faq');
-Route::get('/scores', 'HomeController@scores');
-Route::get('/admins', 'HomeController@admins');
+Route::get('/profile', 'AccountController@profile')->name('home');
+Route::get('/admins', 'AccountController@admins');
 
 
 Route::post('/register', 'Auth\RegisterController@register');
@@ -52,3 +49,9 @@ Route::get('/admin/users/create', 'AdminController@showCreate');
 Route::post('/admin/users/create', 'AdminController@store');
 
 
+Route::get('/tableSize', 'TempController@tableSize');
+Route::get('/tournamentPoints', 'TempController@tournamentPoints');
+Route::get('/points', 'TempController@points');
+Route::get('/tablesPreliminaryRoundRandom', 'TempController@tablesPreliminaryRoundRandom');
+Route::get('/tablesPreliminaryRoundFromPoints', 'TempController@tablesPreliminaryRoundFromPoints');
+Route::get('/tablesKnockout', 'TempController@tablesKnockout');
