@@ -18,7 +18,9 @@ class Countdown extends Migration
             $table->unsignedInteger('round_minutes');
             $table->integer('played_seconds')->nullable();
             $table->integer('resumed_seconds')->nullable();
+            $table->integer('pause_timer')->nullable();
             $table->timestamp('paused_at')->nullable();
+            $table->timestamp('resumed_at')->nullable();
             $table->timestamps();
             });
     }

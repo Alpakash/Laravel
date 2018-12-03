@@ -33,10 +33,13 @@ Route::get('faq', 'HomeController@faq');
 Route::get('scores', 'HomeController@scores');
 Route::get('admins', 'HomeController@admins');
 Route::get('mail', 'HomeController@mail');
+Route::get('judge', 'HomeController@judge');
 
 Route::post('register', 'Auth\RegisterController@register');
 
 Route::post('/countdown', 'CountdownController@create');
 Route::post('/cdpause', 'CountdownController@pause');
+Route::post('/cdpause2', 'CountdownController@pause2');
+Route::post('/cdreset', 'CountdownController@reset');
 Route::post('/cdresume', 'CountdownController@resume');
 

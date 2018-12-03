@@ -52,4 +52,8 @@ class HomeController extends Controller
     {
         return view('welcome-links.admins');
     }
+
+    public function judge() {
+        return view('judge');
+    }
 }

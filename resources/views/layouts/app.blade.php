@@ -77,8 +77,8 @@
                                      <a class="dropdown-item" href="scores">
                                       <i class="far fa-star"></i>  Scores
                                     </a>
-                                     <a class="dropdown-item" href="admins">
-                                       <i class="fas fa-crown"></i> Admins
+                                     <a class="dropdown-item" href="judge">
+                                       <i class="fas fa-crown"></i> Judge
                                     </a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
