@@ -13,10 +13,12 @@ class Countdown extends Migration
      */
     public function up()
     {
-        Schema::create('countdown', function (Blueprint $table) {
+        Schema::create('countdowns', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('duration');
-            $table->timestamp('paused_at');
+            $table->unsignedInteger('round_minutes');
+            $table->integer('played_seconds')->nullable();
+            $table->integer('resumed_seconds')->nullable();
+            $table->timestamp('paused_at')->nullable();
             $table->timestamps();
             });
     }
@@ -28,6 +30,6 @@ class Countdown extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('countdown');
+        Schema::dropIfExists('countdowns');
     }
 }

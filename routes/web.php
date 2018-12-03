@@ -36,7 +36,7 @@ Route::get('mail', 'HomeController@mail');
 
 Route::post('register', 'Auth\RegisterController@register');
 
-Route::post('cdcreate', 'CountdownController@create');
-Route::post('cdpause', 'CountdownController@pause');
-Route::post('cdupdate', 'CountdownController@update');
+Route::post('/countdown', 'CountdownController@create');
+Route::post('/cdpause', 'CountdownController@pause');
+Route::post('/cdresume', 'CountdownController@resume');
 

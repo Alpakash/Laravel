@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Countdown;
 use Illuminate\Http\Request;
 
 class CountdownController extends Controller
@@ -13,11 +14,18 @@ class CountdownController extends Controller
      */
     public function create()
     {
-        DB::table('countdown')
-        ->create(array(
-            'duration' => $_POST("round_duration"), 
-            'created_at' => now()->modify('+45 minutes'))
-        );
+        $countdown = new Countdown();
+
+        $countdown->round_minutes = request('time');
+        $countdown->created_at = now();
+
+        $countdown->save();
+
+        return redirect('/');
+    }
+
+    public function store() {
+
     }
 
     /**
@@ -27,13 +35,14 @@ class CountdownController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function resume()
     {
-        DB::table('countdown')
-        ->create(array(
-            'duration' => $_POST("round_duration"), 
-            'updated_at' => now())
-        );
+        $countdown = \App\Countdown::orderBy("created_at", "desc")->first();
+        $countdown->played_seconds = null;
+        $countdown->updated_at = now();
+        $countdown->save();
+        
+        return redirect('/');
     }
 
     /**
@@ -43,13 +52,29 @@ class CountdownController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function pause(Request $request, $id)
+
+    public function pause()
     {
-        DB::table('countdown')
-        ->update(array(
-            'paused_at' => now())
-        );
-      
+        $countdown = \App\Countdown::orderBy("created_at", "desc")->first();
+        $countdown->paused_at = now();
+
+        $createdTime = strtotime($countdown->created_at);
+        $pausedTime = strtotime($countdown->paused_at);
+        $leftOverTime = ($pausedTime - $createdTime);
+        $countdown->played_seconds = intval($leftOverTime);
+
+        // Judge voert deze round minutes in en deze wijzigen niet
+        $round_minutes = $countdown->round_minutes;
+        // Aantal minuten gespeeld
+        $played_seconds = $countdown->played_seconds;
+
+        // update resumed seconds with the round second minus played seconds
+        $countdown->resumed_seconds = $round_minutes * 60 - $played_seconds;
+
+        $countdown->save();
+
+        return redirect('/profile?paused=true');
+  
     }
 
 }
