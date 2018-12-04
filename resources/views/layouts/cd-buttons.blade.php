@@ -1,8 +1,8 @@
 <?php
+// Set timezone to Europe/Amsterdam
 date_default_timezone_set('Europe/Amsterdam');
 // Get the countdown table, reverse and get the row of the top (lastRow)
 $countdown = DB::table('countdowns')->orderBy("created_at", "desc")->first();
-
 ?>
 
 
@@ -20,14 +20,17 @@ $countdown = DB::table('countdowns')->orderBy("created_at", "desc")->first();
                 </form>
                   
                 <?php 
+
                 if(DB::table('countdowns')->count() > 0){
+                // show there is no pause, show the pause button
                 if (!$countdown->pause_timer) { ?>
                 <form action="/cdpause" method="post">
                 {{ csrf_field() }}
-
+                  <!-- This pause button is only one time, after click set pause_timer = 2 -->
                 <button id="stop-btn" class="btn form-control btn btn-warning btn-sm mb-2">Pause game</button>
                 </form>   
 
+                <!-- if the pause button is clicked and the pause is active, show resume button -->
                 <?php } else if ($countdown->pause_timer == 1) { ?>
                 <form action="/cdresume" method="post">
                 {{ csrf_field() }}
@@ -40,6 +43,12 @@ $countdown = DB::table('countdowns')->orderBy("created_at", "desc")->first();
 
                 <button id="reset-btn" class="btn form-control btn btn-danger btn-sm mb-2" onclick="return confirm('Are you sure you want to reset the game?');">Reset game</button>
                 </form>
+
+                 <!-- Show this pause button after the first pause - pause_timer == 2
+                      Show this pause button after the resume      - pause_timer == 3
+                      
+                      This pause2 button will check the difference between 
+                      the paused_at and resumed_at timestamps  -->
 
                 <?php } else if ($countdown->pause_timer == 2 || $countdown->pause_timer == 3) { ?> 
               <form action="/cdpause2" method="post">

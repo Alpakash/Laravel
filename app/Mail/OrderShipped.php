@@ -28,7 +28,7 @@ class OrderShipped extends Mailable
      */
     public function build()
     {
-        return $this->from('info@bounces.veggiecoder.com', 'Kakashi')
+        return $this->from('info@bounces.veggiecoder.com', 'Carcassonne - Team 11')
         ->view('emails.shipped');
     }
 }

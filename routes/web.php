@@ -18,8 +18,6 @@ Route::get('countdown', 'TestController@response');
 
 Route::get('error', 'TestController@error');
 
-Auth::routes(['verify' => true]);
-
 Route::get('profile', 'HomeController@index')->name('home');
 
 Route::get('news', 'HomeController@news');
@@ -32,11 +30,14 @@ Route::get('judge', 'HomeController@judge');
 
 Route::post('register', 'Auth\RegisterController@register');
 
+// Routes voor de countdown timer create, pause, resume and reset
 Route::post('/countdown', 'CountdownController@create');
 Route::post('/cdpause', 'CountdownController@pause');
 Route::post('/cdpause2', 'CountdownController@pause2');
-Route::post('/cdreset', 'CountdownController@reset');
 Route::post('/cdresume', 'CountdownController@resume');
+Route::post('/cdreset', 'CountdownController@reset');
+
+Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => 'auth'], function(){
     Route::group(['middleware' => ['admin']], function(){
@@ -44,6 +45,9 @@ Route::group(['middleware' => 'auth'], function(){
     });
 });
 
+
+// Als je route sparkpost bezoekt wordt er een mail gestuurd met
+// de layout uit views/emails/test.blade.php
 Route::get('/sparkpost', function () {
     Mail::send('emails.test', [], function ($message) {
       $message

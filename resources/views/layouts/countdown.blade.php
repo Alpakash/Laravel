@@ -1,22 +1,28 @@
+<!-- show the countdown timer -->
 <p id="countdown"></p>
 
 <?php
+// Set timezone to Europe/Amsterdam
 date_default_timezone_set('Europe/Amsterdam');
 // Get the countdown table, reverse and get the row of the top (lastRow)
 $countdown = DB::table('countdowns')->orderBy("created_at", "desc")->first();
 
-// Get the integer in the mySQL db
+// Get the integer in the mySQL db, if theree is a row than assign variables
 if(DB::table('countdowns')->count() > 0){
 $minutes = $countdown->round_minutes;
 $created_at = strtotime($countdown->created_at);
 $paused_at = strtotime($countdown->paused_at);
 $updated_at = strtotime($countdown->updated_at);
 
+/** if there is a row and the timer is paused, show static timer
+ * this timer shows the amount of left over seconds in date format i:s
+*/
 if (DB::table('countdowns')->count() > 0 && $countdown->pause_timer == 1) {
     echo "<strong>Paused at: </strong>" . gmdate("i:s", $countdown->resumed_seconds);
 } }
 ?>
 
+<!-- Javascript countdown timer start here-->
 <script>
     // Set the date we're counting down to
     var countDownDate = <?php if(DB::table('countdowns')->count() > 0){

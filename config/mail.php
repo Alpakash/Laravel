@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'info@bounces.veggiecoder.com'),
-        'name' => env('MAIL_FROM_NAME', 'Akash Soedamah'),
+        'name' => env('MAIL_FROM_NAME', 'Carcassonne - Team 11'),
     ],
 
     /*
