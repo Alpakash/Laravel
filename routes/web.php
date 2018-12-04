@@ -20,12 +20,6 @@ Route::get('error', 'TestController@error');
 
 Auth::routes(['verify' => true]);
 
-Route::group(['middleware' => 'auth'], function(){
-    Route::group(['middleware' => ['admin']], function(){
-        Route::get('welcome', 'TestController@index');
-    });
-});
-
 Route::get('profile', 'HomeController@index')->name('home');
 
 Route::get('news', 'HomeController@news');
@@ -35,6 +29,7 @@ Route::get('admins', 'HomeController@admins');
 Route::get('mail', 'HomeController@mail');
 Route::get('judge', 'HomeController@judge');
 
+
 Route::post('register', 'Auth\RegisterController@register');
 
 Route::post('/countdown', 'CountdownController@create');
@@ -43,3 +38,19 @@ Route::post('/cdpause2', 'CountdownController@pause2');
 Route::post('/cdreset', 'CountdownController@reset');
 Route::post('/cdresume', 'CountdownController@resume');
 
+Route::group(['middleware' => 'auth'], function(){
+    Route::group(['middleware' => ['admin']], function(){
+        Route::get('welcome', 'TestController@index');
+    });
+});
+
+Route::get('/sparkpost', function () {
+    Mail::send('emails.test', [], function ($message) {
+      $message
+        ->from('info@bounces.veggiecoder.com', 'Kakashi')
+        ->to('akash.soedamah@gmail.com', 'Akashhhh')
+        ->subject('From SparkPost with ❤');
+    });
+
+    return redirect('/');
+  });
