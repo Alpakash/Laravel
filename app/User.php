@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'email', 'password',
+        'name', 'lastName', 'email', 'password','role_id'
     ];
 
     /**
@@ -39,4 +39,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Table::class)
                     ->withPivot('game_points', 'weight', 'tournament_points');
     }
+
+    public function verifyUser()
+    {
+        return $this->hasOne('App\VerifyUser');
+    }
+
+
 }

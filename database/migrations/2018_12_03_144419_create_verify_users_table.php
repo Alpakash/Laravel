@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateActivationTable extends Migration
+class CreateVerifyUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateActivationTable extends Migration
      */
     public function up()
     {
-        Schema::create('activation', function (Blueprint $table) {
+        Schema::create('verify_users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('email');
-            $table->string('hash');
-            $table->integer('activated');
+            $table->integer('user_id');
+            $table->string('token');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateActivationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('activation');
+        Schema::dropIfExists('verify_users');
     }
 }
