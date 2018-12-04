@@ -11,22 +11,33 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
 
 Route::get('/', 'HomeController@index' );
-Route::get('/news', 'HomeController@news');
-Route::get('/faq', 'HomeController@faq');
-Route::get('/scores', 'HomeController@scores');
 
-Route::get('/projects', 'ProjectsController@index');
-Route::post('/projects', 'ProjectsController@store');
-Route::get('/projects/create', 'ProjectsController@create');
+Route::get('countdown', 'TestController@response');
 
-Route::get('/error', 'TestController@error');
+Route::get('error', 'TestController@error');
 
-Auth::routes();
+Route::get('profile', 'HomeController@index')->name('home');
+
+Route::get('news', 'HomeController@news');
+Route::get('faq', 'HomeController@faq');
+Route::get('scores', 'HomeController@scores');
+Route::get('admins', 'HomeController@admins');
+Route::get('mail', 'HomeController@mail');
+Route::get('judge', 'HomeController@judge');
+
+
+Route::post('register', 'Auth\RegisterController@register');
+
+// Routes voor de countdown timer create, pause, resume and reset
+Route::post('/countdown', 'CountdownController@create');
+Route::post('/cdpause', 'CountdownController@pause');
+Route::post('/cdpause2', 'CountdownController@pause2');
+Route::post('/cdresume', 'CountdownController@resume');
+Route::post('/cdreset', 'CountdownController@reset');
+
+Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => 'auth'], function(){
     Route::group(['middleware' => ['admin']], function(){
@@ -34,24 +45,16 @@ Route::group(['middleware' => 'auth'], function(){
     });
 });
 
-Route::get('/profile', 'AccountController@profile')->name('home');
-Route::get('/admins', 'AccountController@admins');
 
+// Als je route sparkpost bezoekt wordt er een mail gestuurd met
+// de layout uit views/emails/test.blade.php
+Route::get('/sparkpost', function () {
+    Mail::send('emails.test', [], function ($message) {
+      $message
+        ->from('info@bounces.veggiecoder.com', 'Kakashi')
+        ->to('akash.soedamah@gmail.com', 'Akashhhh')
+        ->subject('From SparkPost with ❤');
+    });
 
-Route::post('/register', 'Auth\RegisterController@register');
-
-// Admin web request
-
-Route::get('/admin/users', 'AdminController@index');
-Route::get('/admin/users/create', 'AdminController@showCreate');
-
-// Admin post request
-Route::post('/admin/users/create', 'AdminController@store');
-
-
-Route::get('/tableSize', 'TempController@tableSize');
-Route::get('/tournamentPoints', 'TempController@tournamentPoints');
-Route::get('/points', 'TempController@points');
-Route::get('/tablesPreliminaryRoundRandom', 'TempController@tablesPreliminaryRoundRandom');
-Route::get('/tablesPreliminaryRoundFromPoints', 'TempController@tablesPreliminaryRoundFromPoints');
-Route::get('/tablesKnockout', 'TempController@tablesKnockout');
+    return redirect('/');
+  });

@@ -18,11 +18,7 @@
 
     <!-- Font awesome icons -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/css/mdb.min.css" />
-    <link rel="stylesheet" href="/css/style.min.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
     <!-- Bootstrap Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
@@ -44,6 +40,8 @@
                     <ul class="navbar-nav mr-auto">
 
                     </ul>
+                    <!-- Countdown Timer JavaScript-->
+                        @include('layouts.countdown')             
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -60,7 +58,7 @@
                         @else
                         
                         <li class="nav-item">
-                             <a href="/welcome"><button class="btn btn-danger mr-3"> Carcassonne Insights</button></a>
+                             <a href="welcome"><button class="btn btn-danger mr-3"> Carcassonne Insights</button></a>
                         </li>
                             <li class="nav-item dropdown">                  
                                 <a id="navbarDropdown" class=" dropdown-toggle btn btn-warning" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -70,17 +68,17 @@
             
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                     <a class="dropdown-item" href="/news">
+                                     <a class="dropdown-item" href="news">
                                       <i class="far fa-newspaper"></i>  News
                                     </a>
-                                     <a class="dropdown-item" href="/faq">
+                                     <a class="dropdown-item" href="faq">
                                        <i class="fas fa-question"></i> FAQ
                                     </a>
-                                     <a class="dropdown-item" href="/scores">
+                                     <a class="dropdown-item" href="scores">
                                       <i class="far fa-star"></i>  Scores
                                     </a>
-                                     <a class="dropdown-item" href="/admins">
-                                       <i class="fas fa-crown"></i> Admins
+                                     <a class="dropdown-item" href="judge">
+                                       <i class="fas fa-crown"></i> Judge
                                     </a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -106,10 +104,8 @@
             @yield('content')
         </main>
     </div>
-
-
-    @include('layouts.scripts')
-
+    
+ 
 
 </body>
 </html>

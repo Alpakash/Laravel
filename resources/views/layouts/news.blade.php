@@ -4,10 +4,9 @@
             <div class="card">
                 <div class="card-header"><strong>News</strong>
                 </div>
-
                 <div class="card-body">
-     Enter news/updates data
-                      </div>
+                Enter NEWS data
+                </div>
             </div>
         </div>
     </div>
