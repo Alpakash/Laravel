@@ -26,6 +26,7 @@ Route::get('scores', 'HomeController@scores');
 Route::get('admins', 'HomeController@admins');
 Route::get('mail', 'HomeController@mail');
 Route::get('judge', 'HomeController@judge');
+Route::get('projects', 'ProjectsController@index');
 
 
 Route::post('register', 'Auth\RegisterController@register');

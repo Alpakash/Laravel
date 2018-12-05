@@ -19,49 +19,7 @@
                   <div class="cardBorder">                 
                  <center><p>{{ Auth::user()->name }}</p></center>
                 </div>
-                  <div class="cardBorder">                 
-                 <center><p>{{ Auth::user()->name }}</p></center>
                 </div>
-                  <div class="cardBorder">                 
-                 <center><p>{{ Auth::user()->name }}</p></center>
-                </div>
-                  <div class="cardBorder">                 
-                 <center><p>{{ Auth::user()->name }}</p></center>
-                </div>
-                  <div class="cardBorder">                 
-                 <center><p>{{ Auth::user()->name }}</p></center>
-                </div>
-                  <div class="cardBorder">                 
-                 <center><p>{{ Auth::user()->name }}</p></center>
-                </div>
-                  <div class="cardBorder">                 
-                 <center><p>{{ Auth::user()->name }}</p></center>
-                </div>
-                  <div class="cardBorder">                 
-                 <center><p>{{ Auth::user()->name }}</p></center>
-                </div>
-                  <div class="cardBorder">                 
-                 <center><p>{{ Auth::user()->name }}</p></center>
-                </div>
-                  <div class="cardBorder">                 
-                 <center><p>{{ Auth::user()->name }}</p></center>
-                </div>
-                  <div class="cardBorder">                 
-                 <center><p>{{ Auth::user()->name }}</p></center>
-                </div>
-                  <div class="cardBorder">                 
-                 <center><p>{{ Auth::user()->name }}</p></center>
-                </div>
-                  <div class="cardBorder">                 
-                 <center><p>{{ Auth::user()->name }}</p></center>
-                </div>
-                  <div class="cardBorder">                 
-                 <center><p>{{ Auth::user()->name }}</p></center>
-                </div>
-                  <div class="cardBorder">                 
-                 <center><p>{{ Auth::user()->name }}</p></center>
-                </div>
-                      </div>
             </div>
         </div>
     </div>

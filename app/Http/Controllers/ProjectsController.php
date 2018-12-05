@@ -13,14 +13,22 @@ class ProjectsController extends Controller
         // always begin with 1
         $matchArray = [1];
         $patterInt = 1;
+        $nextPosition = 1;
         for($i=1;$i<=$int;$i++){
-
-            if($patterInt > $int){
-
-                array_push($matchArray, ($patterInt = $patterInt - 4));
+            $nextPosition = $nextPosition + 4;
+            $minPlus = " + 4";
+            if($nextPosition > $int){
+                $lastestPosi = end($matchArray);
+                if($lastestPosi > $int){
+                    $patterInt = $patterInt - 4;
+                }else{
+                    $patterInt = $lastestPosi + 2;
+                }
             }else{
-                array_push($matchArray, ($patterInt = $patterInt + 4));
+                $patterInt = $patterInt + 4;
             }
+            array_push($matchArray, $patterInt);
+
 
         }
 

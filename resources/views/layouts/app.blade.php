@@ -22,7 +22,7 @@
     <!-- Bootstrap Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
-    
+    {!! NoCaptcha::renderJs() !!}
 </head>
 <body>
     <div id="app">
@@ -64,9 +64,6 @@
                                 <a id="navbarDropdown" class=" dropdown-toggle btn btn-warning" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                   <i class="fas fa-user"></i>  {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
-
-            
-
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                      <a class="dropdown-item" href="news">
                                       <i class="far fa-newspaper"></i>  News
@@ -86,8 +83,6 @@
                                                      document.getElementById('logout-form').submit();">
                                       <i class="fas fa-sign-out-alt"></i>  {{ __('Logout') }}
                                     </a>
-
-                                   
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
 
