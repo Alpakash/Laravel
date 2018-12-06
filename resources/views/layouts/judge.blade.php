@@ -5,6 +5,8 @@
                 <div class="card-header"><strong>Admins</strong><span class="float-right">15 admins are at the Carcassonne NK</span></div>
 
                 <div class="card-body">
+
+
      
                   <div class="cardBorder">                 
                  <center><p>{{ Auth::user()->name }}</p></center>

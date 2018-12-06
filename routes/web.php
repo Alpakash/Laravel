@@ -20,9 +20,6 @@ Route::get('/news', 'HomeController@news');
 Route::get('/faq', 'HomeController@faq');
 Route::get('/scores', 'HomeController@scores');
 
-Route::get('/projects', 'ProjectsController@index');
-Route::post('/projects', 'ProjectsController@store');
-Route::get('/projects/create', 'ProjectsController@create');
 
 Route::get('/error', 'TestController@error');
 
@@ -35,7 +32,7 @@ Route::group(['middleware' => 'auth'], function(){
 });
 
 Route::get('/profile', 'AccountController@profile')->name('home');
-Route::get('/admins', 'AccountController@admins');
+Route::get('/judge', 'AccountController@judge');
 
 Route::post('/register', 'Auth\RegisterController@register');
 
