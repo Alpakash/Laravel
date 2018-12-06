@@ -44,7 +44,9 @@
                     <ul class="navbar-nav mr-auto">
 
                     </ul>
-
+                    <!-- Countdown Timer JavaScript-->
+                    @include('layouts.countdown')   
+                    
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
