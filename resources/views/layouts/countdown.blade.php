@@ -3,8 +3,7 @@
 
 @php
 use \App\Countdown;
-// Set timezone to Europe/Amsterdam
-date_default_timezone_set('Europe/Amsterdam');
+
 // Get the countdown table, reverse and get the row of the top (lastRow)
 $countdown = Countdown::orderBy("created_at", "desc")->first();
 $countdownExist = Countdown::count() > 0;
@@ -22,6 +21,7 @@ if($countdownExist){
         echo "<strong>Paused at: </strong>" . gmdate("i:s", $countdown->resumed_seconds);
     }
 }
+
 @endphp
 
 <!-- Javascript countdown timer start here-->

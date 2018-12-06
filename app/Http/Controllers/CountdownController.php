@@ -14,6 +14,8 @@ class CountdownController extends Controller
      */
     public function create()
     {
+        // Set timezone to Europe/Amsterdam
+        date_default_timezone_set('Europe/Amsterdam');
         // Create new countdown object
         $countdown = new Countdown();
         // $tournament = new Tournament();
@@ -56,6 +58,7 @@ class CountdownController extends Controller
      */
     public function resume()
     {
+        date_default_timezone_set('Europe/Amsterdam');
         // select the last row in the db by reversing the rows
         $countdown = \App\Countdown::orderBy("created_at", "desc")->first();
         // set pause_timer to 3 and show pause2 button
@@ -79,6 +82,7 @@ class CountdownController extends Controller
 
     public function pause()
     {
+        date_default_timezone_set('Europe/Amsterdam');
         // select the last row in the db by reversing the rows
         $countdown = \App\Countdown::orderBy("created_at", "desc")->first();
         // set paused_at row to timestamp of current time
@@ -109,6 +113,7 @@ class CountdownController extends Controller
     }
 
     public function pause2 () {
+        date_default_timezone_set('Europe/Amsterdam');
         // select the last row in the db by reversing the rows
         $countdown = \App\Countdown::orderBy("created_at", "desc")->first();
         // set pause_timer to 1 and show resume button
