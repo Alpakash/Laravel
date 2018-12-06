@@ -6,6 +6,10 @@
                 </div>
 
                 <div class="card-body">
+
+                                                    <!-- Countdown Timer JavaScript-->
+                                                    @include('layouts.cd-buttons')   
+                                                    
      Enter news/updates data
                       </div>
             </div>
