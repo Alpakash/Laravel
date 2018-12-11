@@ -1,38 +1,69 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>NK Carcassonne</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-
-    <!-- Font awesome icons -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('/css/mdb.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('/css/style.min.css') }}" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <!-- Bootstrap Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
-    
+   @include('layouts.header')
 </head>
-<body>
+<body class="grey lighten-3 preload">
+    <!-- Navbar -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+        <div class="container-fluid">
 
-    <main class="py-4">
-        @yield('content')
-    </main>
+        {{--<!-- Brand -->--}}
+        {{--<a class="navbar-brand waves-effect" href="https://mdbootstrap.com/docs/jquery/" target="_blank">--}}
+        {{--<strong class="blue-text">999games</strong>--}}
+        {{--</a>--}}
 
+        <!-- Collapse -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Links -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <!-- Left -->
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link waves-effect" href="#">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+
+                </ul>
+
+                <!-- Right -->
+                <ul class="navbar-nav nav-flex-icons">
+
+                    <li class="nav-item">
+                        <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="nav-link border border-light rounded waves-effect"
+                           target="_blank">
+                            <i class="fa fa-github mr-2"></i>Home
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+    </nav>
+    <!-- Navbar -->
+    @if(Session::has('msg-success'))
+        <div class="message-wrap box-shadow">
+            <div class="d-flex flex-row justify-content-center align-items-center">
+                <span>{!! session('msg-success') !!}</span>
+            </div>
+        </div>
+    @elseif(Session::has('msg-danger'))
+        <div class="message-wrap danger box-shadow">
+            <div class="d-flex flex-row justify-content-center align-items-center">
+                <span>{!! session('msg-success') !!}</span>
+            </div>
+        </div>
+    @endif
+    @yield('content')
+
+    {{--@include('layouts.footer')--}}
     @include('layouts.scripts')
 
 

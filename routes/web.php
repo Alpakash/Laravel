@@ -13,6 +13,7 @@
 
 
 Route::get('/', 'HomeController@index' );
+Route::get('/home', 'HomeController@index' );
 
 Route::get('countdown', 'TestController@response');
 
@@ -30,6 +31,7 @@ Route::get('projects', 'ProjectsController@index');
 
 
 Route::post('register', 'Auth\RegisterController@register');
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 // Routes voor de countdown timer create, pause, resume and reset
 Route::post('/countdown', 'CountdownController@create');
@@ -37,15 +39,32 @@ Route::post('/cdpause', 'CountdownController@pause');
 Route::post('/cdpause2', 'CountdownController@pause2');
 Route::post('/cdresume', 'CountdownController@resume');
 Route::post('/cdreset', 'CountdownController@reset');
+//Route::resources('judge', 'JudgeController');
 
 Auth::routes(['verify' => true]);
 
+
+// Check if any user is loged in
 Route::group(['middleware' => 'auth'], function(){
+    // Access for only the admin
     Route::group(['middleware' => ['admin']], function(){
-        Route::get('welcome', 'TestController@index');
+        // admin dashboard
+        Route::get('/admin', 'AdminController@index')->name('admin');
+        Route::get('/admin/add', 'AdminController@create');
+
+        // admin users
+        Route::get('/admin/deelnemers/', 'AdminUserController@index');
+        Route::get('/admin/deelnemers/{id}', 'AdminUserController@details');
+        Route::get('/admin/deelnemers/{id}/edit', 'AdminUserController@edit');
+
+        Route::post('/admin/deelnemers/{id}/edit', 'AdminUserController@store');
+        Route::post('/admin/add', 'AdminController@store');
+
+        // admin judges
     });
 });
 
+Route::get('/welcome', 'TestController@index');
 
 // Als je route sparkpost bezoekt wordt er een mail gestuurd met
 // de layout uit views/emails/test.blade.php
@@ -59,3 +78,4 @@ Route::get('/sparkpost', function () {
 
     return redirect('/');
   });
+

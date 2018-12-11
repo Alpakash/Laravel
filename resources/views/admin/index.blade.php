@@ -1,66 +1,250 @@
 @extends('layouts.dashboard')
+
 @section('content')
-    <div class="container">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-        </ul>
+    @include('layouts.sidebar')
+    <!--Main layout-->
+    <main class="pt-5 mx-lg-5">
+        <div class="container-fluid mt-5">
 
-        <!-- Default form login -->
-        <form class="text-center border border-light p-5">
+            <div class="card mb-4 wow fadeIn mt-4 bg-transparent no-box-shadow" style="border-bottom: 1px solid  white;">
 
-            <p class="h4 mb-4">Sign in</p>
+                <!--Card content-->
+                <div class="card-body d-sm-flex justify-content-between">
 
-            <!-- Email -->
-            <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
+                    <h4 class="mb-2 mb-sm-0 d-flex align-items-center text-dark">
+                        Gegevens
+                    </h4>
 
-            <!-- Password -->
-            <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+                </div>
 
-            <div class="d-flex justify-content-around">
-                <div>
-                    <!-- Remember me -->
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
-                        <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
+            </div>
+            <!--Grid row-->
+            <div class="row animated fadeIn mb-4">
+                <div class="col-lg-3 col-md-3 col-sm-12 mt-lg-4 mt-md-4 mt-5">
+                    <div class="card d-flex flex-column">
+                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                            <div class="d-flex justify-content-end align-items-center w-100">
+                                <span class="header-wrap d-flex justify-content-end align-items-center box-shadow">
+                                    <i class="fas fa-users"></i>
+                                </span>
+                                <span class="font-weight-bold text-black-50" style="font-size: 30px;">{{ count($users) }}</span>
+                            </div>
+                            <hr class="w-100 mb-3 " />
+                            <span class="header-body">
+                                Deelnemers
+                            </span>
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <!-- Forgot password -->
-                    <a href="">Forgot password?</a>
+                <div class="col-lg-3 col-md-3 col-sm-12 mt-lg-4 mt-md-4 mt-5">
+                    <div class="card d-flex flex-column">
+                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                            <div class="d-flex justify-content-end align-items-center w-100">
+                                <span class="header-wrap d-flex justify-content-end align-items-center box-shadow" style="background: #34ac54;">
+                                    <i class="fas fa-gavel"></i>
+                                </span>
+                                <span class="font-weight-bold text-black-50" style="font-size: 30px;">2</span>
+                            </div>
+                            <hr class="w-100 mb-3 " />
+                            <span class="header-body">
+                                Judges
+                            </span>
+                        </div>
+                    </div>
                 </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 mt-lg-4 mt-md-4 mt-5">
+                    <div class="card d-flex flex-column">
+                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                            <div class="d-flex justify-content-end align-items-center w-100">
+                                <span class="header-wrap d-flex justify-content-end align-items-center box-shadow" style="background: #bf8f03;">
+                                    <i class="fas fa-toolbox"></i>
+                                </span>
+                                <span class="font-weight-bold text-black-50" style="font-size: 30px;">1</span>
+                            </div>
+                            <hr class="w-100 mb-3 " />
+                            <span class="header-body">
+                                Admin
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 mt-lg-4 mt-md-4 mt-5">
+                    <div class="card d-flex flex-column">
+                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                            <div class="d-flex justify-content-end align-items-center w-100">
+                                <span class="header-wrap d-flex justify-content-end align-items-center box-shadow" style="background: #e13013;">
+                                    <i class="fas fa-store-alt"></i>
+                                </span>
+                                <span class="font-weight-bold text-black-50" style="font-size: 30px;">4</span>
+                            </div>
+                            <hr class="w-100 mb-3 " />
+                            <span class="header-body">
+                                Winkels
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                {{--<div class="col-lg-4 col-md-4 col-sm-12 mt-4">--}}
+                    {{--<div class="card d-flex flex-column">--}}
+                        {{--<div class="card-body d-flex flex-column justify-content-center align-items-center">--}}
+                            {{--<div class="header-wrap d-flex justify-content-center align-items-center" style="border-color: #0ec03d;">--}}
+                                {{--<span class="font-weight-bold"  style="color: #0ec03d;">2</span>--}}
+                            {{--</div>--}}
+                            {{--<span class="mt-4 header-body">--}}
+                                {{--Judges--}}
+                             {{--</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+
+                {{--</div>--}}
+                {{--<div class="col-lg-4 col-md-4 col-sm-12 mt-4">--}}
+                    {{--<div class="card d-flex flex-column">--}}
+                        {{--<div class="card-body d-flex flex-column justify-content-center align-items-center">--}}
+                            {{--<div class="header-wrap d-flex justify-content-center align-items-center" style="border-color: #bf8f03;">--}}
+                                {{--<span class="font-weight-bold"  style="color: #bf8f03;">1</span>--}}
+                            {{--</div>--}}
+                            {{--<span class="mt-4 header-body" >--}}
+                                {{--Admin--}}
+                        {{--</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+
+                {{--</div>--}}
+
             </div>
+            <!--Grid row-->
 
-            <!-- Sign in button -->
-            <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
+            <!-- Heading -->
+            <div class="card mb-4 animated  fadeIn mt-4">
 
-            <!-- Register -->
-            <p>Not a member?
-                <a href="">Register</a>
-            </p>
+                <!--Card content-->
+                <div class="card-body d-sm-flex justify-content-between">
 
-            <!-- Social login -->
-            <p>or sign in with:</p>
+                    <h4 class="mb-2 mb-sm-0 d-flex align-items-center text-home-blue">
+                        <a href="https://mdbootstrap.com/docs/jquery/" target="_blank">Rijst deelnemers</a>
+                    </h4>
+                    <div class="d-flex">
+                        <button class="btn bg-white btn-home-hover mr-3 text-black-50 btn-sm my-0 p no-radius border-light no-box-shadow" type="submit">
+                            <i class="fas fa-plus"></i>
+                            Deelnemer
+                        </button>
+                        <form class="d-flex justify-content-center m-0">
+                            <!-- Default input -->
+                            <input type="search" placeholder="Zoek gebruikers" aria-label="Search" class="form-control no-radius">
+                            <button class="btn bg-home btn-sm my-0 p no-radius" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
 
-            <a type="button" class="light-blue-text mx-2">
-                <i class="fa fa-facebook"></i>
-            </a>
-            <a type="button" class="light-blue-text mx-2">
-                <i class="fa fa-twitter"></i>
-            </a>
-            <a type="button" class="light-blue-text mx-2">
-                <i class="fa fa-linkedin"></i>
-            </a>
-            <a type="button" class="light-blue-text mx-2">
-                <i class="fa fa-github"></i>
-            </a>
+                        </form>
+                    </div>
 
-        </form>
-        <!-- Default form login -->
-    </div>
 
+                </div>
+
+            </div>
+            <!-- Heading -->
+
+
+            <!--Grid row-->
+            <div class="row animated  fadeIn">
+
+                <!--Grid column-->
+                <div class="col-md-12 mb-4">
+
+                    <!--Card-->
+                    <div class="card">
+
+                        <!--Card content-->
+                        <div class="card-body">
+
+                            <div class="table-responsive oTable">
+                                <table class="table" style="border-collapse: initial !important;">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">voornaam</th>
+                                        <th scope="col">achternaam</th>
+                                        <th scope="col">email</th>
+                                        <th scope="col">Geactiveerd</th>
+                                        <th scope="col">Actie</th>
+                                    </tr>
+                                    </thead>
+                                    @foreach($users as $user)
+                                        <tbody>
+                                        <tr>
+                                            <td>{{ $user->name }}</td>
+                                            <td>{{ $user->lastName }}</td>
+                                            <td>{{ $user->email }}</td>
+                                            <td>
+                                                <span class="checkIcon checkIcon{{ ($user->verified == 1)? 'Green' : 'Red' }} round-btn">
+                                                    <a class="btn d-flex justify-content-center align-items-center p-0">
+                                                        <i class="fas fa-{{ ($user->verified == 1)? 'check' : 'times' }}"></i>
+                                                    </a>
+                                                </span>
+                                            </td>
+                                            <td class="d-flex justify-content-start">
+                                                <span class="pencilIcon round-btn mr-3">
+                                                    <a href="/admin/deelnemers/{{$user->id}}" class="btn d-flex justify-content-center align-items-center p-0">
+                                                        <i class="fas fa-pencil-alt"></i>
+                                                    </a>
+                                                </span>
+                                                <span class="trashIcon round-btn">
+                                                    <a href="/deelnemers" class="btn d-flex justify-content-center align-items-center p-0">
+                                                       <i class="fas fa-trash-alt"></i>
+                                                    </a>
+                                                </span>
+
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    @endforeach
+                                </table>
+                            </div>
+
+                        </div>
+                        <div class="card-footer bg-white text-right">
+                            <a href='admin/deelnemers' class="btn bg-home btn-sm p no-radius text-white" >
+                                <i class="fas fa-users mr-2"></i>
+                                <span>Meer deelnemers</span>
+                            </a>
+                        </div>
+
+                    </div>
+                    <!--/.Card-->
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-3 mb-4">
+
+                    <!--Card-->
+                    <div class="card mb-4">
+
+                        <!-- Card header -->
+                        <div class="card-header text-center">
+                            Pie chart
+                        </div>
+
+                        <!--Card content-->
+                        <div class="card-body">
+
+                            <canvas id="pieChart"></canvas>
+
+                        </div>
+
+                    </div>
+                    <!--/.Card-->
+
+
+                </div>
+                <!--Grid column-->
+
+            </div>
+            <!--Grid row-->
+
+
+        </div>
+    </main>
+    <!--Main layout-->
 
 @endsection
