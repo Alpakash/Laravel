@@ -30,6 +30,10 @@ class StatUser
      * @var int $tournamentPoints The amount of tournament points the user earned.
      */
     public $tournamentPoints;
+    /**
+     * @var bool $last If the person should be fourth by default
+     */
+    public $last;
 
     /**
      * StatUser constructor.

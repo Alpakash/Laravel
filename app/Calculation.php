@@ -119,16 +119,22 @@ class Calculation
         else if ($userCount === 0)
             throw new \InvalidArgumentException('No users given.');
 
-        usort($users, array($this, "scoreCompare"));
+        $playedUsers = [];
+        $notPlayedUsers = [];
+        foreach ($users as $user){
+            if ($user->last)
+                $notPlayedUsers[] = $user;
+            else
+                $playedUsers[] = $user;
+        }
+
+        usort($playedUsers, array($this, "scoreCompare"));
+        usort($notPlayedUsers, array($this, "scoreCompare"));
         rsort($tournamentPoints);
 
-        $totalScore = array_reduce($users,
-            function(int $i = null, StatUser $user) {
-                if($i === null)
-                    return $user->score;
-                return $i + $user->score;
-            }
-        );
+        $users = array_merge($playedUsers, $notPlayedUsers);
+
+        $totalScore = array_reduce($users, array($this, "totalScore"));
 
         for ($i = 0; $i < $userCount; $i++){
             if ($users[$i]->score === $users[$i + 1]->score){
@@ -156,6 +162,19 @@ class Calculation
             return 0;
 
         return ($a->score < $b->score) ? -1 : 1;
+    }
+
+    /**
+     * This function is used for getting the total score via a array reduce.
+     * @param int|null $i The previous value.
+     * @param StatUser $user The user to add the score to the total.
+     * @return int The new total score.
+     */
+    private function totalScore(int $i = null, StatUser $user)
+    {
+        if($i === null)
+            return $user->score;
+        return $i + $user->score;
     }
 
     /**
@@ -256,15 +275,16 @@ class Calculation
     public function tablesKnockout(array $users)
     {
         $userCount = count($users);
-        if ($userCount % 2 !== 0)
-            throw new \InvalidArgumentException('Not an even amount of users required for the knockout phase.');
-        else if ($userCount === 0)
-            throw new \InvalidArgumentException('No users given.');
 
-        if ($userCount > 16){
-            $users = $this->orderUsers($users);
-            $users = array_slice($users, 0, 16);
-        }
+        if ($userCount === 0)
+            throw new \InvalidArgumentException('No users given.');
+        else if (($users & ($users - 1)) == 0)
+            throw new \InvalidArgumentException('With the amount of people given for the knockout phase there will be people left over.');
+
+        if ($userCount === 2)
+            return [
+                $users
+            ];
 
         $users = $this->orderUsers($users);
 
