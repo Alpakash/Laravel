@@ -72,7 +72,7 @@ Route::get('/sparkpost', function () {
     Mail::send('emails.test', [], function ($message) {
       $message
         ->from('info@bounces.veggiecoder.com', 'Kakashi')
-        ->to('akash.soedamah@gmail.com', 'Akashhhh')
+        ->to('nguyen.netwerk@gmail.com', 'Akashhhh')
         ->subject('From SparkPost with ❤');
     });
 
