@@ -7,11 +7,11 @@
 
                 <div class="card-body">
 
-                                                    <!-- Countdown Timer JavaScript-->
-                                                    @include('layouts.cd-buttons')   
+                    <!-- Countdown Timer JavaScript-->
+                    @include('layouts.cd-buttons')   
                                                     
-     Enter news/updates data
-                      </div>
+                    {{$news}}
+                </div>
             </div>
         </div>
     </div>

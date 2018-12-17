@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\News;
 
 class HomeController extends Controller
 {
@@ -14,7 +15,7 @@ class HomeController extends Controller
 
     public function news()
     {
-        return view('welcome-links.news');
+        return view('welcome-links.news')->with('news',News::all());
     }
 
     public function faq()
