@@ -7,10 +7,31 @@ use App\User;
 
 class HomeController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        return view('welcome');
+        return view('profile');
     }
+
+    public function mail()
+    {
+        return view('mails');
+    }
+
 
     public function news()
     {
@@ -25,5 +46,14 @@ class HomeController extends Controller
     public function scores()
     {
         return view('welcome-links.scores');
+    }
+
+    public function admins()
+    {
+        return view('welcome-links.admins');
+    }
+
+    public function judge() {
+        return view('judge');
     }
 }

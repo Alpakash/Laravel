@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Foundation\Testing\HttpException;
+use Illuminate\Support\Facades\DB;
 
 
 class RegisterController extends Controller
@@ -53,9 +54,10 @@ class RegisterController extends Controller
 
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:255'],
+            'lastName' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'g-recaptcha-response' => 'required',
         ]);
     }
 
@@ -69,9 +71,30 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
-            'username' => $data['username'],
+            'lastName' => $data['lastName'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password'])
+            'password' => Hash::make($data['password']),
+            'role_id' => 3
         ]);
+    }
+    /**
+     * Create a new user instance after a valid registration by the admin with no mail
+     *
+     * @param  array  $data
+     * @return \App\User
+     */
+
+    protected function adminCreate(array $data)
+    {
+        $id = DB::table('users')->insertGetId([
+            'name' => $data['name'],
+            'lastName' => $data['lastName'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'verified' => 1,
+            'email_verified_at' => $data['email_verified_at'],
+            'role_id' => $data['role_id']
+        ]);
+        return User::findOrFail($id);
     }
 }

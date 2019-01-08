@@ -9,14 +9,14 @@
 @include('layouts.cd-buttons')
 </div>
 </div>
-        
+
 
             <div class="card">
                 <div class="card-header"><strong>Admins</strong><span class="float-right">15 admins are at the Carcassonne NK</span></div>
 
                 <div class="card-body">
 
-              <div class="cardBorder">                 
+              <div class="cardBorder">
                  <center><p>{{ Auth::user()->name }}</p></center>
                 </div>
                   <div class="cardBorder">                 
@@ -61,7 +61,7 @@
                   <div class="cardBorder">                 
                  <center><p>{{ Auth::user()->name }}</p></center>
                 </div>
-                      </div>
+                </div>
             </div>
         </div>
     </div>

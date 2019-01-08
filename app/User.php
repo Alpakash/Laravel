@@ -6,7 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
     protected $table = 'users';
@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'email', 'password','role_id'
+        'name', 'lastName', 'email', 'password', 'role_id'
     ];
 
     /**
@@ -29,14 +29,14 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
+    public static $rules = [
+      'name' => 'required',
+      'lastName' => 'required'
+    ];
 
-    public function tables()
+
+    public function Role()
     {
-        return $this->belongsToMany(Table::class)
-                    ->withPivot('game_points', 'weight', 'tournament_points');
+        return $this->hasOne('App\Role', 'id','role_id');
     }
 }
