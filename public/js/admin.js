@@ -2,13 +2,10 @@
 $(document).ready(function(){
     var highestBox =0;
     $('.account-card', this).each(function(){
-
-
         // If this box is higher than the cached highest then store it
         if($(this).height() > highestBox) {
             highestBox = $(this).height();
         }
-
     });
 
     // Set the height of all those children to whichever was highest

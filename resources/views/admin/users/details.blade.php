@@ -28,7 +28,7 @@
                 <div class="col-md-3 mb-4">
 
                     <!--Card-->
-                    <div class="card account-card">
+                    <div class="card  ">
 
                         <!--Card content-->
                         <div class="card-body d-flex justify-content-between align-items-center flex-column">

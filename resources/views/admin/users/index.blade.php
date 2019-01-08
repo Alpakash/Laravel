@@ -38,7 +38,7 @@
             </div>
             <!-- Heading -->
             <!--Grid row-->
-            <div class="row animated  fadeIn">
+            <div class="row animated fadeIn">
 
                 <!--Grid column-->
                 <div class="col-md-12 mb-4">
@@ -50,7 +50,7 @@
                         <div class="card-body">
                             <div class="w-100">
                                 {{--class=""  width="100%" style="border-collapse: initial !important;"--}}
-                                <table id="userTable" class="table table-striped mt-3" width="100%" style="border-collapse: initial !important;" >
+                                <table id="userTable" class="table  mt-3" width="100%" style="border-collapse: initial !important;" >
                                     <thead>
                                     <tr>
                                         <th scope="col">voornaam</th>
