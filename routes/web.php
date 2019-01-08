@@ -60,18 +60,6 @@ Route::group(['middleware' => 'auth'], function(){
     });
 });
 
-// Als je route sparkpost bezoekt wordt er een mail gestuurd met
-// de layout uit views/emails/test.blade.php
-/*Route::get('/sparkpost', function () {
-    Mail::send('emails.test', [], function ($message) {
-        $message
-            ->from('info@bounces.veggiecoder.com', 'Kakashi')
-            ->to('nguyen.netwerk@gmail.com', 'Akashhhh')
-            ->subject('From SparkPost with ❤');
-    });
-
-    return redirect('/');
-  });*/
 
 Route::get('/welcome', 'TestController@index');
 Route::get('/profile', 'AccountController@profile')->name('home');
@@ -102,16 +90,15 @@ Route::group(['middleware' => 'auth'], function(){
     });
 });
 
-
 // Als je route sparkpost bezoekt wordt er een mail gestuurd met
 // de layout uit views/emails/test.blade.php
-Route::get('/sparkpost', function () {
+/*Route::get('/sparkpost', function () {
     Mail::send('emails.test', [], function ($message) {
-      $message
-        ->from('info@bounces.veggiecoder.com', 'Kakashi')
-        ->to('akash.soedamah@gmail.com', 'Akashhhh')
-        ->subject('From SparkPost with ❤');
+        $message
+            ->from('info@bounces.veggiecoder.com', 'Kakashi')
+            ->to('nguyen.netwerk@gmail.com', 'Akashhhh')
+            ->subject('From SparkPost with ❤');
     });
 
     return redirect('/');
-  });
+});*/
