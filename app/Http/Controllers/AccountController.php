@@ -28,8 +28,8 @@ class AccountController extends Controller
         return view('profile');
     }
 
-    public function admins()
+    public function judge()
     {
-        return view('welcome-links.admins');
+        return view('welcome-links.judges');
     }
 }

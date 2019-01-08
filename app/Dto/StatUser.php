@@ -30,6 +30,10 @@ class StatUser
      * @var int $tournamentPoints The amount of tournament points the user earned.
      */
     public $tournamentPoints;
+    /**
+     * @var bool $last If the person should be fourth by default
+     */
+    public $last;
 
     /**
      * StatUser constructor.
@@ -40,6 +44,9 @@ class StatUser
     {
         $this->id = $id;
         $this->score = $score;
+        $this->weight = 0;
+        $this->tournamentPoints = 0;
+        $this->last = false;
     }
 
     /**
@@ -48,13 +55,15 @@ class StatUser
      * @param int $score The score of the user.
      * @param int $weight The weight of the user.
      * @param int $tournamentPoints The tournament points of the user.
+     * @param bool $last If the player needs to be last or not.
      * @return StatUser The StatUser object.
      */
-    public static function create(int $id, int $score, int $weight, int $tournamentPoints)
+    public static function create(int $id, int $score, int $weight, int $tournamentPoints, bool $last)
     {
         $statUser = new StatUser($id, $score);
         $statUser->weight = $weight;
         $statUser->tournamentPoints = $tournamentPoints;
+        $statUser->last = $last;
         return $statUser;
     }
 }

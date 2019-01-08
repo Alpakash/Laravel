@@ -33,13 +33,9 @@ Route::get('projects', 'ProjectsController@index');
 Route::post('register', 'Auth\RegisterController@register');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-// Routes voor de countdown timer create, pause, resume and reset
-Route::post('/countdown', 'CountdownController@create');
-Route::post('/cdpause', 'CountdownController@pause');
-Route::post('/cdpause2', 'CountdownController@pause2');
-Route::post('/cdresume', 'CountdownController@resume');
-Route::post('/cdreset', 'CountdownController@reset');
-//Route::resources('judge', 'JudgeController');
+Route::get('/error', 'TestController@error');
+
+Auth::routes();
 
 Auth::routes(['verify' => true]);
 
@@ -64,7 +60,48 @@ Route::group(['middleware' => 'auth'], function(){
     });
 });
 
+// Als je route sparkpost bezoekt wordt er een mail gestuurd met
+// de layout uit views/emails/test.blade.php
+/*Route::get('/sparkpost', function () {
+    Mail::send('emails.test', [], function ($message) {
+        $message
+            ->from('info@bounces.veggiecoder.com', 'Kakashi')
+            ->to('nguyen.netwerk@gmail.com', 'Akashhhh')
+            ->subject('From SparkPost with ❤');
+    });
+
+    return redirect('/');
+  });*/
+
 Route::get('/welcome', 'TestController@index');
+Route::get('/profile', 'AccountController@profile')->name('home');
+Route::get('/judge', 'AccountController@judge');
+
+Route::post('/register', 'Auth\RegisterController@register');
+
+Route::resource('/judge','JudgeController');
+Route::get('/tableSize', 'TempController@tableSize');
+Route::get('/tournamentPoints', 'TempController@tournamentPoints');
+Route::get('/points', 'TempController@points');
+Route::get('/tablesPreliminaryRoundRandom', 'TempController@tablesPreliminaryRoundRandom');
+Route::get('/tablesPreliminaryRoundFromPoints', 'TempController@tablesPreliminaryRoundFromPoints');
+Route::get('/tablesKnockout', 'TempController@tablesKnockout');
+
+// Routes voor de countdown timer create, pause, resume and reset
+Route::post('/countdown', 'CountdownController@create');
+Route::post('/cdpause', 'CountdownController@pause');
+Route::post('/cdpause2', 'CountdownController@pause2');
+Route::post('/cdresume', 'CountdownController@resume');
+Route::post('/cdreset', 'CountdownController@reset');
+
+Auth::routes(['verify' => true]);
+
+Route::group(['middleware' => 'auth'], function(){
+    Route::group(['middleware' => ['admin']], function(){
+        Route::get('welcome', 'TestController@index');
+    });
+});
+
 
 // Als je route sparkpost bezoekt wordt er een mail gestuurd met
 // de layout uit views/emails/test.blade.php
@@ -72,10 +109,9 @@ Route::get('/sparkpost', function () {
     Mail::send('emails.test', [], function ($message) {
       $message
         ->from('info@bounces.veggiecoder.com', 'Kakashi')
-        ->to('nguyen.netwerk@gmail.com', 'Akashhhh')
+        ->to('akash.soedamah@gmail.com', 'Akashhhh')
         ->subject('From SparkPost with ❤');
     });
 
     return redirect('/');
   });
-
