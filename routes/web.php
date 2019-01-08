@@ -60,6 +60,10 @@ Route::group(['middleware' => 'auth'], function(){
 });
 
 
+Route::resource('/score', 'ScoreInputController', [
+    'except' => ['edit', 'show', 'store']
+]);
+
 // Als je route sparkpost bezoekt wordt er een mail gestuurd met
 // de layout uit views/emails/test.blade.php
 Route::get('/sparkpost', function () {
