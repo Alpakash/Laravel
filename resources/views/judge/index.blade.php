@@ -1,7 +1,18 @@
 @extends('layouts.app')
 @section('content')
 
-	<div class="container">
+	<div class="container mt-5">
+
+		<div class="card mb-4">
+			<div class="card-header">
+				<strong>Countdown timer</strong>
+			</div>
+			<div class="card-body">
+		<!-- Countdown Timer JavaScript-->
+		@include('layouts.cd-buttons')
+			</div>
+		</div>
+
 		<div class="card">
 			<div class="card-header">
 				<strong>Users</strong>

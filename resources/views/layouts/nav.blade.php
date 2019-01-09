@@ -31,26 +31,27 @@
                     @else
 
                     <li class="nav-item">
-                         <a href="welcome"><button class="btn btn-danger mr-3"> Carcassonne Insights</button></a>
+                         <a href="/welcome"><button class="btn btn-danger mr-3"> Carcassonne Insights</button></a>
                     </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class=" dropdown-toggle btn btn-warning" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                               <i class="fas fa-user"></i>  {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                 <a class="dropdown-item" href="news">
+                                 <a class="dropdown-item" href="/news">
                                   <i class="far fa-newspaper"></i>  News
                                 </a>
-                                 <a class="dropdown-item" href="faq">
+                                 <a class="dropdown-item" href="/faq">
                                    <i class="fas fa-question"></i> FAQ
                                 </a>
-                                 <a class="dropdown-item" href="scores">
+                                 <a class="dropdown-item" href="/scores">
                                   <i class="far fa-star"></i>  Scores
                                 </a>
-                                 <a class="dropdown-item" href="judge">
+                                @if(Auth::user()->isJudge() || Auth::user()->isAdmin())
+                                <a class="dropdown-item" href="/judge">
                                    <i class="fas fa-crown"></i> Judge
                                 </a>
-
+                                @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">

@@ -13,7 +13,7 @@ class ScoreInputController extends Controller
      */
     public function index()
     {
-        //
+        return view('scoreinput');
     }
 
     /**

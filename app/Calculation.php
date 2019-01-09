@@ -38,7 +38,8 @@ class Calculation
 
         if ($mod === 1 && $tableSize[0]->amountOfTables === 1){
             $tableSize[0]->amountOfTables -= 1;
-            $tableSize[] = new TableSize(1, 5);
+            $tableSize[] = new TableSize(1, 3);
+            $tableSize[] = new TableSize(1, 2);
         }
         else if ($mod === 1){
             $tableSize[0]->amountOfTables -= 2;
@@ -64,40 +65,23 @@ class Calculation
      */
     public function tournamentPoints(int $tableSize){
         switch ($tableSize){
-            case 6:
-                return [
-                    13,
-                    11,
-                    9,
-                    6,
-                    3,
-                    1
-                ];
-            case 5:
-                return [
-                    13,
-                    10,
-                    7,
-                    4,
-                    1
-                ];
             case 4:
                 return [
-                    13,
-                    9,
                     5,
+                    3,
+                    2,
                     1
                 ];
             case 3:
                 return [
-                    13,
-                    7,
-                    1
+                    5,
+                    3,
+                    2
                 ];
             case 2:
                 return [
-                    13,
-                    1
+                    5,
+                    3
                 ];
             default:
                 return [];

@@ -50,7 +50,7 @@ class HomeController extends Controller
 
     public function admins()
     {
-        return view('welcome-links.admins');
+        return view('admins');
     }
 
     public function judge() {

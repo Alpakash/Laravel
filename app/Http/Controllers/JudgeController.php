@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Role;
+use Auth;
 
 class JudgeController extends Controller
 {
@@ -15,8 +16,13 @@ class JudgeController extends Controller
      */
     public function index()
     {
-        $users = User::where('role_id',1)->get();
-        return view('judge.index')->with('users',$users);
+        if (Auth::check() && Auth::user()->role->role == 'Judge') {
+            $users = User::where('role_id',1)->get();
+            return view('judge.index')->with('users',$users);
+        } else {
+            return redirect('/');
+        }
+
     }
 
     /**
@@ -41,7 +47,7 @@ class JudgeController extends Controller
            //Validate name, email and password fields
         $this->validate($request, [
         'name'=>'required|max:40',
-        // 'lastname'=>'required|max:40',
+         'lastname'=>'required|max:40',
         'email'=>'required|email|unique:users',
         'password'=>'required|min:6|confirmed'
         ]);

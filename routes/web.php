@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::get('/', 'HomeController@index' );
 Route::get('/home', 'HomeController@index' );
 
@@ -19,7 +18,7 @@ Route::get('countdown', 'TestController@response');
 
 Route::get('error', 'TestController@error');
 
-Route::get('profile', 'HomeController@index')->name('home');
+Route::get('profile', 'HomeController@index');
 
 Route::get('news', 'HomeController@news');
 Route::get('faq', 'HomeController@faq');
@@ -55,11 +54,8 @@ Route::group(['middleware' => 'auth'], function(){
 
         Route::post('/admin/deelnemers/{id}/edit', 'AdminUserController@store');
         Route::post('/admin/add', 'AdminController@store');
-
-        // admin judges
     });
 });
-
 
 Route::get('/welcome', 'TestController@index');
 Route::get('/profile', 'AccountController@profile')->name('home');
@@ -91,19 +87,5 @@ Route::group(['middleware' => 'auth'], function(){
 });
 
 Route::resource('/score', 'ScoreInputController', [
-    'except' => ['edit', 'show', 'store']
+    'except' => ['delete', 'show', 'store']
 ]);
-
-// Als je route sparkpost bezoekt wordt er een mail gestuurd met
-// de layout uit views/emails/test.blade.php
-/*Route::get('/sparkpost', function () {
-    Mail::send('emails.test', [], function ($message) {
-        $message
-            ->from('info@bounces.veggiecoder.com', 'Kakashi')
-            ->to('nguyen.netwerk@gmail.com', 'Akashhhh')
-            ->subject('From SparkPost with ❤');
-    });
-
-    return redirect('/');
-});*/
-

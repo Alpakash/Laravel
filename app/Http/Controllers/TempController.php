@@ -45,6 +45,7 @@ class TempController extends Controller
             \App\Dto\StatUser::create(0, 70, 20, 33, false),
             \App\Dto\StatUser::create(0, 30, 40, 60, false),
             \App\Dto\StatUser::create(0, 40, 20, 33, false),
+            \App\Dto\StatUser::create(0, 40, 20, 33, false),
         ],
             $calculation->tableSize(13)));
     }
@@ -66,8 +67,11 @@ class TempController extends Controller
             \App\Dto\StatUser::create(0, 70, 20, 33, false),
             \App\Dto\StatUser::create(0, 30, 40, 60, false),
             \App\Dto\StatUser::create(0, 40, 20, 33, false),
+            \App\Dto\StatUser::create(0, 40, 20, 33, false),
+            \App\Dto\StatUser::create(0, 40, 20, 33, false),
+            \App\Dto\StatUser::create(0, 40, 20, 33, false),
         ],
-            $calculation->tableSize(13)));
+            $calculation->tableSize(16)));
     }
 
     public function tablesKnockout()

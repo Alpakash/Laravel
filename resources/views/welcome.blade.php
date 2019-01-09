@@ -156,7 +156,6 @@ Vanaf 1998 begeeft het bedrijf zich op het uitgeverspad met een nieuwe generatie
                     <a class="linkColorHover" href="/faq">FAQ</a>
                     <a class="linkColorHover" href="/scores">Scores</a>
                     <a class="linkColorHover" href="/admins">Admins</a>
-                    
                 </div>
             </div>
         </div>
