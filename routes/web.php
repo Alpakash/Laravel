@@ -64,6 +64,7 @@ Route::get('/judge', 'AccountController@judge');
 Route::post('/register', 'Auth\RegisterController@register');
 
 Route::resource('/judge','JudgeController');
+Route::resource('/admin/news', 'NewsController');
 Route::get('/tableSize', 'TempController@tableSize');
 Route::get('/tournamentPoints', 'TempController@tournamentPoints');
 Route::get('/points', 'TempController@points');
