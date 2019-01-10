@@ -31,7 +31,7 @@
                     @else
 
                     <li class="nav-item">
-                         <a href="/welcome"><button class="btn btn-danger mr-3"> Carcassonne Insights</button></a>
+                         <a href="/profile"><button class="btn btn-success mr-3"> Mijn profiel</button></a>
                     </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class=" dropdown-toggle btn btn-warning" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

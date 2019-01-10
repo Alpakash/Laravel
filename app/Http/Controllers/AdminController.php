@@ -17,7 +17,7 @@ class AdminController extends Controller
     {
         // select al users
         $users = User::where('role_id', '=', 3)->OrderBy('created_at', 'desc')->take(5)->get();
-        // select loged in user based on unipue email
+        // select logged in user based on unique email
         $roleWithRole = User::where([['email','=', Auth::user()->email], ['name', '=', Auth::user()->name]])->with(['Role'])->first();
         $role = $roleWithRole->Role->role;
         return view('admin.index', compact('users', 'role'));

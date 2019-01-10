@@ -16,13 +16,12 @@ class JudgeController extends Controller
      */
     public function index()
     {
-        if (Auth::check() && Auth::user()->role->role == 'Judge') {
+        if (Auth::user()->isJudge()) {
             $users = User::where('role_id',1)->get();
             return view('judge.index')->with('users',$users);
         } else {
             return redirect('/');
         }
-
     }
 
     /**

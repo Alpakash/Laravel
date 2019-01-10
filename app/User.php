@@ -55,33 +55,21 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isAdmin()
     {
-        return $this->where([
-            ['role_id', '=',    1],
-            ['id',      '=',    Auth::user()->id]
-        ])->first() ? true : false;
+        return $this->role_id === 1 ? true : false;
     }
 
     public function isJudge()
     {
-        return $this->where([
-            ['role_id', '=',    2],
-            ['id',      '=',    Auth::user()->id]
-        ])->first() ? true : false;
+        return $this->role_id === 2 ? true : false;
     }
 
     public function isUser()
     {
-        return $this->where([
-            ['role_id', '=',    3],
-            ['id',      '=',    Auth::user()->id]
-        ])->first() ? true : false;
+        return $this->role_id === 3 ? true : false;
     }
 
     public function isStore()
     {
-        return $this->where([
-            ['role_id', '=',    4],
-            ['id',      '=',    Auth::user()->id]
-        ])->first() ? true : false;
+        return $this->role_id === 4 ? true : false;
     }
 }

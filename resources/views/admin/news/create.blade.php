@@ -18,7 +18,7 @@
         <label for="name" class="col-md-4 col-form-label text-md-right">Description</label>
 
         <div class="col-md-6">
-           <textarea style="width: 100%;height: 90%;" name="desc"></textarea>
+           <textarea style="width: 80%;height: 50%;" name="desc"></textarea>
             @if ($errors->has('desc'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('desc') }}</strong>
@@ -29,7 +29,7 @@
 
 
 
-
+<br>
  
     <div class="form-group row mb-0">
         <div class="col-md-6 offset-md-4">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class ScoreInputController extends Controller
 {
@@ -13,7 +14,13 @@ class ScoreInputController extends Controller
      */
     public function index()
     {
-        return view('scoreinput');
+        if (Auth::user()->isJudge() || Auth::user()->isAdmin()) {
+            return view('scoreinput');
+        } else {
+            return redirect('/');
+        }
+
+
     }
 
     /**

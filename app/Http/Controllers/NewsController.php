@@ -28,21 +28,22 @@ class NewsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storage
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
            //Validate
         $this->validate($request, [
-        'title'=>'required|max:10',
+        'title'=>'required|max:100',
         'desc'=>'required'
         ]);
         $input=$request->all();
         News::create($input);
-        return redirect()->route('news.index')->with('msg-success',' successfully added.');
+        return view('welcome-links.news')->with('news',News::all());
     }
 
     /**
@@ -65,7 +66,6 @@ class NewsController extends Controller
      */
     public function edit($id)
     {
-
         $news=News::findorFail($id);
         return view('admin.news.edit')->with('news',$news);
     }
@@ -73,9 +73,10 @@ class NewsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, $id)
     {  
