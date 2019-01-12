@@ -1,7 +1,7 @@
  <div class="container">
-    <div class="row justify-content-center mt-3">
+    <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card mt-5">
                 <div class="card-header"><strong>News</strong>
                 </div>
 
@@ -25,17 +25,16 @@
                                         <p> {{ $news->desc }}</p>                                    </div>
                                 </div>
                     @endforeach
-
-
-
-
                             </div>
                         </div>
                 </div>
-
-
                 </div>
             </div>
+
         </div>
-    </div>
+            @if(Auth::user()->isAdmin() || Auth::user()->isJudge())
+     <center><a href="/admin/news/create"><button class="mt-5 btn btn-primary">Creëer artikel</button></a></center>
+            @endif
+ </div>
+
 </div>

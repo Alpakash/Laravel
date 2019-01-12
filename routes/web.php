@@ -79,14 +79,18 @@ Route::post('/cdpause2', 'CountdownController@pause2');
 Route::post('/cdresume', 'CountdownController@resume');
 Route::post('/cdreset', 'CountdownController@reset');
 
+
+Route::post('/generateRound', 'HomeController@generateTables');
+Route::post('/gamePoints', 'HomeController@assignGamePoints');
+
 Auth::routes(['verify' => true]);
 
-Route::group(['middleware' => 'auth'], function(){
-    Route::group(['middleware' => ['admin']], function(){
-        Route::get('welcome', 'TestController@index');
-    });
-});
+//Route::group(['middleware' => 'auth'], function(){
+//    Route::group(['middleware' => ['admin']], function(){
+//        Route::get('welcome', 'TestController@index');
+//    });
+//});
 
-Route::resource('/score', 'ScoreInputController', [
+Route::resource('/score/{tableid}', 'ScoreInputController', [
     'except' => ['delete', 'show', 'store']
 ]);

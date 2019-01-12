@@ -30,12 +30,24 @@
                         </li>
                     @else
 
+                        @if(Auth::user()->isAdmin())
+                        <li class="nav-item">
+                            <a href="/admin"><button class="btn btn-primary mr-3"> Admin Dashboard</button></a>
+                        </li>
+                            @elseif(Auth::user()->isJudge())
+                                <li class="nav-item">
+                                    <a href="/judge"><button class="btn btn-primary mr-3"> Judge Page</button></a>
+                                </li>
+                        @endif
+
                     <li class="nav-item">
-                         <a href="/profile"><button class="btn btn-success mr-3"> Mijn profiel</button></a>
+                         <a href="/profile"><button class="btn btn-success mr-3"> <i class="fas fa-user"></i> Mijn Profiel</button></a>
                     </li>
+
+
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class=" dropdown-toggle btn btn-warning" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                              <i class="fas fa-user"></i>  {{ Auth::user()->name }} <span class="caret"></span>
+                               Menu <span class="caret"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                  <a class="dropdown-item" href="/news">

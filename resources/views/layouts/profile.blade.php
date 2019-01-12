@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card mt-4">
+            <div class="card mt-4 mb-4">
                 <div style="text-align: center;" class="card-header"><strong>Dashboard</strong></div>
 
                 <div class="card-body">

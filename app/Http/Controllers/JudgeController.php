@@ -16,7 +16,7 @@ class JudgeController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->isJudge()) {
+        if (Auth::user()->isJudge() || Auth::user()->isAdmin()) {
             $users = User::where('role_id',1)->get();
             return view('judge.index')->with('users',$users);
         } else {

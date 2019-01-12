@@ -6,9 +6,10 @@
 <body>
 
     @include('layouts.nav')
-
+    <div class="pagesImg">
     @yield('content')
 
     @include('layouts.scripts')
+    </div>
 </body>
 </html>

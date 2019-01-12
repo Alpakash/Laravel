@@ -1,83 +1,57 @@
 @extends('layouts.app')
 @section('content')
+    <?php
+$usersOnTable = count($usersPerTable[$table_id]);
+    ?>
+
     <div class="container">
-        <center><h1 class="mt-4">Tafel 1 / Ronde 1</h1></center>
-    <div class="row">
+
+
+        <center><h1 class="pt-4 mb-5">Tafel {{$usersPerTable[$table_id][0]->table_id}} / Ronde 1</h1></center>
+        <form action="/gamePoints" method="post">
+            @csrf
+        <div class="row">
+
         @if(Auth::user()->isAdmin() || Auth::user()->isJudge())
-            <div class="col-md-6">
-                <div class="card mt-4">
-                     <div class="card-header"><center><strong>User 1</strong></center>
+
+        @for($i=0; $i < $usersOnTable ; $i++)
+            <br>
+
+                <div class="col-md-6 mb-5">
+                    <div class="card">
+                        <div class="card-header"><center><strong>{{$usersPerTable[$table_id][$i]->name}} {{$usersPerTable[$table_id][$i]->lastName}}
+                                </strong></center>
                         </div>
 
                         <div class="card-body">
-                            <form action="">
+
                                 <div class="form-group col-md-12">
-                                    <input type="email" class="form-control" id="inputEmail4" placeholder="Game points">
+                                    <input type="number" class="form-control" value="{{$usersPerTable[$table_id][$i]->game_points}}" placeholder="Game points" name="{{$usersPerTable[$table_id][$i]->id}}">
+
                                 </div>
-                            </form>
 
                         </div>
+                    </div>
+                </div>
+            @endfor
+
 
                 </div>
-            </div>
+            <input type="submit" value="SCORES DOORVOEREN" class="btn btn-success">
 
-            <div class="col-md-6">
-                <div class="card mt-4">
-                     <div class="card-header"><center><strong>User 2</strong></center>
-                        </div>
-
-                        <div class="card-body">
-                            <form action="">
-                                <div class="form-group col-md-12">
-                                    <input type="email" class="form-control" id="inputEmail4" placeholder="Game points">
-                                </div>
-                            </form>
-
-                        </div>
-
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="card mt-4">
-                     <div class="card-header"><center><strong>User 3</strong></center>
-                        </div>
-
-                        <div class="card-body">
-                            <form action="">
-                                <div class="form-group col-md-12">
-                                    <input type="email" class="form-control" id="inputEmail4" placeholder="Game points">
-                                </div>
-                            </form>
-
-                        </div>
-
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="card mt-4">
-                     <div class="card-header"><center><strong>User 4</strong></center>
-                        </div>
-
-                        <div class="card-body">
-                            <form action="">
-                                <div class="form-group col-md-12">
-                                    <input type="email" class="form-control" id="inputEmail4" placeholder="Game points">
-                                </div>
-                            </form>
-
-                        </div>
-
-                </div>
+        </form>
             </div>
 
 
 
         @endif
+
     </div>
-</div>
+
+    </div>
+    <center><a href="/scores"><button class="mb-4 btn btn-primary"><i class="fas fa-angle-left"></i> naar tafels</button></a></center>
 @endsection
+
 
 {{-- 1. Pagina maken waar alleen judge en admin bij kan->middleware('judge/admin') }}
 

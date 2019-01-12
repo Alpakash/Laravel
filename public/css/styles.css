@@ -8,6 +8,15 @@ body, html{
   height: 100%;
 }
 
+.tableLinks {
+  color: black;
+}
+
+/*.pagesImg {*/
+  /*background-image: url("https://maken.wikiwijs.nl/generated/s1152x864_73d7958436ba8f123872b3f5e6cceb0a.jpg");*/
+  /*background-repeat: no-repeat;*/
+  /*background-size: cover;*/
+/*}*/
 
 .message-wrap{
   position: fixed;

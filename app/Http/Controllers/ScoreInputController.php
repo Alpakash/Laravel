@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class ScoreInputController extends Controller
 {
@@ -12,10 +14,24 @@ class ScoreInputController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($table_id)
     {
+    $calculation = new \App\Calculation();
+
+        $users_table = DB::table('users')
+            ->join('tables_users', 'users.id', '=', 'tables_users.user_id')
+            ->select('users.*', 'tables_users.table_id', 'tables_users.game_points')
+            ->orderBy('table_id')
+            ->where('role_id', 3)
+            ->get()
+            ->toArray();
+
+
+        $totalUsers = count($users_table);
+        $usersPerTable = $calculation->tablesPreliminaryRound($users_table, $calculation->tableSize($totalUsers));
+
         if (Auth::user()->isJudge() || Auth::user()->isAdmin()) {
-            return view('scoreinput');
+            return view('scoreinput', compact('table_id', 'users_table', 'usersPerTable'));
         } else {
             return redirect('/');
         }

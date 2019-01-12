@@ -16,7 +16,7 @@ $countdown = Countdown::orderBy("created_at", "desc")->first();
 
         <div class="mx-auto" style="width: 200px;">
 
-        <button id="start-btn" class="btn form-control btn btn-success btn-sm mb-2 mt-3" onclick="return confirm('Are you sure you want to start the game?');">Start new game</button>
+        <button id="start-btn" class="btn form-control btn btn-success btn-sm mb-2 mt-3" onclick="return confirm('Weet je zeker dat je de game wilt starten?');">Start new game</button>
 
     </form>
 

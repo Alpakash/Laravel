@@ -10,6 +10,7 @@ namespace App;
 
 use App\Dto\TableSize;
 use App\Dto\StatUser;
+use Illuminate\Support\Facades\DB;
 
 class Calculation
 {
@@ -36,7 +37,7 @@ class Calculation
             new TableSize(floor($userCount / 4), 4)
         ];
 
-        if ($mod === 1 && $tableSize[0]->amountOfTables === 1){
+        if ($mod === 1 && intval($tableSize[0]->amountOfTables) === 1){
             $tableSize[0]->amountOfTables -= 1;
             $tableSize[] = new TableSize(1, 3);
             $tableSize[] = new TableSize(1, 2);
@@ -206,12 +207,67 @@ class Calculation
             $availableSpace += $tableSize->amountOfTables * $tableSize->tableSize;
         }
 
-        if (count($users) !== $availableSpace)
+        $userCount = count($users);
+        if ($userCount === 0)
+            throw new \InvalidArgumentException('No users given.');
+        if ($userCount !== intval($availableSpace))
             throw new \InvalidArgumentException('There will be an amount of people left over with these table sizes.');
 
         shuffle($users);
 
         return $this->defineTables($users, $tableSizes);
+    }
+
+
+    /**
+     * Split the users over tables without random layout.
+     * @param array $users The users to split over each table.
+     * @param array $tableSizes The size of each table.
+     * @return array The users of each table.
+     */
+    public function tablesPreliminaryRound(array $users, array $tableSizes)
+    {
+        $availableSpace = 0;
+        foreach ($tableSizes as $tableSize){
+            $availableSpace += $tableSize->amountOfTables * $tableSize->tableSize;
+        }
+
+        $userCount = count($users);
+        if ($userCount === 0)
+            throw new \InvalidArgumentException('No users given.');
+        if ($userCount !== intval($availableSpace))
+            throw new \InvalidArgumentException('There will be an amount of people left over with these table sizes.');
+
+
+        return $this->defineTables($users, $tableSizes);
+    }
+
+    public function generateTables() {
+        $calculation = new \App\Calculation();
+
+        $users = User::all()->toArray();
+        $allUsers = [];
+
+        foreach ($users as $user) {
+            $allUsers[] = $user['id'];
+        }
+
+        $totalUsers = count($allUsers);
+        $usersPerTable = $calculation->tablesPreliminaryRoundRandom($allUsers, $calculation->tableSize($totalUsers));
+        $totalTables = count($usersPerTable);
+
+        DB::table('tables_users')->truncate();
+
+        for($i=0; $i < $totalTables; $i++) {
+            foreach($usersPerTable[$i] as $users_id) {
+                DB::table('tables_users')->insert([
+                    ['table_id' => ($i+1), 'user_id' => $users_id]
+                ]);
+            }
+        }
+
+        return redirect('/scores');
+
     }
 
     /**
@@ -226,11 +282,11 @@ class Calculation
         foreach ($tableSizes as $tableSize){
             $availableSpace += $tableSize->amountOfTables * $tableSize->tableSize;
         }
-        
+
         $userCount = count($users);
         if ($userCount === 0)
             throw new \InvalidArgumentException('No users given.');
-        else if ($userCount != $availableSpace)
+        else if ($userCount != intval($availableSpace))
             throw new \InvalidArgumentException('There will be an amount of people left over with these table sizes.');
 
 
@@ -271,7 +327,7 @@ class Calculation
 
         if ($userCount === 0)
             throw new \InvalidArgumentException('No users given.');
-        else if (($users & ($users - 1)) == 0)
+        else if (($userCount & ($userCount - 1)) == 0)
             throw new \InvalidArgumentException('With the amount of people given for the knockout phase there will be people left over.');
 
         if ($userCount === 2)
