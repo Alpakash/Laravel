@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddRoleToUsers extends Migration
+class CreateTempUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddRoleToUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function(Blueprint $table) {
-            $table->integer('role_id')->unsigned()->default(1);
+        Schema::create('temp_users', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('email');
+            $table->integer('role_id');
+            $table->string('hash');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class AddRoleToUsers extends Migration
      */
     public function down()
     {
-        Schema::table('users', function(Blueprint $table) {
-            $table->dropColumn('role_id');
-        });
+        Schema::dropIfExists('temp_users');
     }
 }

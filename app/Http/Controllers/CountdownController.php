@@ -21,7 +21,7 @@ class CountdownController extends Controller
         // $tournament = new Tournament();
         
         // $tournament->countdowns->count();
-        
+
         // Get the time out of the input filled in by judge
         $countdown->round_minutes = request('time');
         // set the timestamp at now at created_at row

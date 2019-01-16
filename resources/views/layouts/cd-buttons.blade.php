@@ -13,13 +13,13 @@ $countdown = Countdown::orderBy("created_at", "desc")->first();
     <form action="/countdown" method="post">
         {{ csrf_field() }}
         <input class="form-control" type="text" name="time" placeholder="Round time" required>
-      
+
         <div class="mx-auto" style="width: 200px;">
 
-        <button id="start-btn" class="btn form-control btn btn-success btn-sm mb-2 mt-3" onclick="return confirm('Are you sure you want to start the game?');">Start new game</button>
+        <button id="start-btn" class="btn form-control btn btn-success btn-sm mb-2 mt-3" onclick="return confirm('Weet je zeker dat je de game wilt starten?');">Start new game</button>
 
     </form>
-                  
+
     @if(Countdown::count() > 0)
         @if (!$countdown->pause_timer)
             <form action="/cdpause" method="post">
@@ -44,7 +44,7 @@ $countdown = Countdown::orderBy("created_at", "desc")->first();
 
              <!-- Show this pause button after the first pause - pause_timer == 2
                   Show this pause button after the resume      - pause_timer == 3
-                      
+
                   This pause2 button will check the difference between
                   the paused_at and resumed_at timestamps  -->
 

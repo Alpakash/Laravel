@@ -4,11 +4,14 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Notifications\VerifyEmail;
+use Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
+
     protected $table = 'users';
 
     /**
@@ -17,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'email', 'password','role_id'
+        'name', 'lastName', 'email', 'password', 'role_id'
     ];
 
     /**
@@ -29,14 +32,44 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function role()
+    public static $rules = [
+      'name' => 'required',
+      'lastName' => 'required'
+    ];
+
+    /**
+     * Send the email verification notification.
+     *
+     * @return void
+     */
+    public function sendEmailVerificationNotification()
     {
-        return $this->belongsTo(Role::class);
+        $this->notify(new VerifyEmail);
     }
 
-    public function tables()
+
+    public function Role()
     {
-        return $this->belongsToMany(Table::class)
-                    ->withPivot('game_points', 'weight', 'tournament_points');
+        return $this->hasOne('App\Role', 'id','role_id');
+    }
+
+    public function isAdmin()
+    {
+        return $this->role_id === 1 ? true : false;
+    }
+
+    public function isJudge()
+    {
+        return $this->role_id === 2 ? true : false;
+    }
+
+    public function isUser()
+    {
+        return $this->role_id === 3 ? true : false;
+    }
+
+    public function isStore()
+    {
+        return $this->role_id === 4 ? true : false;
     }
 }

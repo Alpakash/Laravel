@@ -53,10 +53,10 @@ if($countdownExist){
             minutes + ":" + seconds;
         @endif
 
-        // If the count down is over, write some text 
+        // If the count down is over, write some text
         if (distance < 0){
             clearInterval(x);
-            document.getElementById("countdown").innerHTML = "The end!";
+            document.getElementById("countdown").innerHTML = "Einde van de ronde!";
         }
     }, 1000); 
     </script>    

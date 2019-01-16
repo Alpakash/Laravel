@@ -19,9 +19,9 @@ class AuthMaintenance
     public function handle($request, Closure $next)
     {
         if(Auth::check()){
+            if(Auth::user()->role_id !== 1){
 
-            if(Auth::user()->email !== 'akash.soedamah@gmail.com'){
-                return redirect('/home');
+                return redirect('/login');
             }
         }
 

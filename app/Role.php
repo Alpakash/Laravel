@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     use Notifiable;
-    
+    protected $table = 'roles';
     /**
      * The attributes that are mass assignable.
      *
@@ -18,8 +18,8 @@ class Role extends Model
         'role'
     ];
 
-    public function users()
+    public function Users()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany('App\User', 'id', 'roles_id');
     }
 }

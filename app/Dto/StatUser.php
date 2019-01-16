@@ -27,7 +27,7 @@ class StatUser
      */
     public $weight;
     /**
-     * @var int $tournamentPoints The amount of tournament points the user earned.
+     * @var float $tournamentPoints The amount of tournament points the user earned.
      */
     public $tournamentPoints;
     /**
@@ -39,14 +39,15 @@ class StatUser
      * StatUser constructor.
      * @param int $id The id of the user.
      * @param int $score The score of the user.
+     * @param bool $last If the person is last or not.
      */
-    public function __construct(int $id, int $score)
+    public function __construct(int $id, int $score, bool $last = false)
     {
         $this->id = $id;
         $this->score = $score;
         $this->weight = 0;
-        $this->tournamentPoints = 0;
-        $this->last = false;
+        $this->tournamentPoints = 0.0;
+        $this->last = $last;
     }
 
     /**

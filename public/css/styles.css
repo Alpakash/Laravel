@@ -1,7 +1,55 @@
-body {
-    background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/r5s_vd7impvjych/videoblocks-family-playing-a-board-game-together-having-a-lot-of-fun-carcassonne_rd8pauzp2g_thumbnail-full01.png");
-    background-size: cover;
-    background-repeat: no-repeat;
+@import 'pages/admin.css';
+@import 'pages/auth.css';
+
+body, html{
+    /*background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/r5s_vd7impvjych/videoblocks-family-playing-a-board-game-together-having-a-lot-of-fun-carcassonne_rd8pauzp2g_thumbnail-full01.png");*/
+    /*background-size: cover;*/
+    /*background-repeat: no-repeat;*/
+  height: 100%;
+}
+
+.tableLinks {
+  color: black;
+}
+
+/*.pagesImg {*/
+  /*background-image: url("https://maken.wikiwijs.nl/generated/s1152x864_73d7958436ba8f123872b3f5e6cceb0a.jpg");*/
+  /*background-repeat: no-repeat;*/
+  /*background-size: cover;*/
+/*}*/
+
+.message-wrap{
+  position: fixed;
+  top: 70px;
+  right: -100%;
+  background: #ffffff;
+  z-index: 1000;
+  padding: 1em;
+  color: #3db73d;
+}
+
+.danger{
+  color:red !important;
+}
+
+.message-wrap .success{
+  background: #ffffff;
+  color: #0ec237;
+  border: 2px solid #0ec237;
+
+}
+
+.card{
+  border-radius: 0 !important;
+}
+
+.no-border{
+  border: unset;
+}
+
+.btn-home-hover:hover{
+  background: #4289d4 !important;
+  color: white !important;
 }
 
 .profileLabel {
@@ -41,19 +89,51 @@ body {
   background-color: #fe9b27;
 }
 
-@media screen and (min-width: 992px) {
-.profileIcon { 
-  margin-right: 20%;
+#rc-imageselect, .g-recaptcha {
+  transform:scale(.8);
+  -webkit-transform:scale(.8);
+  transform-origin:0 0;
+  -webkit-transform-origin:0 0;
 }
 
-.profileLabel {
-  margin-left: 20%;
-}
+
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+  .form-element i.ft-20{
+    font-size: 15px;
+  }
+
+  #rc-imageselect, .g-recaptcha {
+    transform:scale(1);
+    -webkit-transform:scale(1);
+  }
+
+
 }
 
-.cardBorder {
-  border: 1px rgba(128, 128, 128, 0.4) solid;
-  border-radius: 5px;
-  padding: 20px 10px 0px 10px;
-  margin-bottom: 20px;
+/* iPads (landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+  .form-element i.ft-20{
+    font-size: 15px;
+  }
+
+
+
+}
+
+
+/* iPads (portrait) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+  .form-element i.ft-20{
+    font-size: 15px;
+  }
+
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+  .form-element i.ft-20{
+    font-size: 15px;
+  }
+
 }

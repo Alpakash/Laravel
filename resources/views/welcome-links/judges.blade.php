@@ -1,4 +1,4 @@
 @extends('layouts.app')
 @section('content')
-@include('layouts.judge')
+@include('layouts.admins')
 @endsection
