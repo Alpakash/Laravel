@@ -20,14 +20,17 @@
 
    <div class="cardBorder">
        <div class="profileIcon"> <i class="fas fa-forward"></i> </div>
-       <div class="profileLabel"> 
-                  <strong>Upcoming match:</strong><p> @foreach($users_table as $key => $tableData)
+       <div class="profileLabel">
+               <strong>Upcoming match:</strong><p>
+               @foreach($users_table as $key => $tableData)
                    {{$tableData->name}}@if(count($users_table) != $key+1),@endif
-
                @endforeach
 
+               @isset($users_table[0]) @ Table {{$users_table[0]->table_id}}
 
-               @ Table {{$users_table[0]->table_id}}</p>
+               @else No upcoming match @endisset
+               </p>
+
        </div>
    </div>
   <div class="cardBorder">
