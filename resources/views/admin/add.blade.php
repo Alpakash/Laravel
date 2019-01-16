@@ -15,10 +15,10 @@
                                <i class="fas fa-home"></i>
                            </a>
                        </li>
-                       <li><a href="/admin" class="text-black-50">/ Dashboard</a></li>
+                       <li><a href="{{ route('admin') }}" class="text-black-50">/ Dashboard</a></li>
                        <li><a href="">/ Toevoegen</a></li>
                    </ul>
-                    <a href='/admin' class="btn bg-white text-home-blue no-box-shadow p-2 no-radius" style="border: 1px solid #1c5ea4;">
+                    <a href='javascript:history.back()' class="btn bg-white text-home-blue no-box-shadow p-2 no-radius" style="border: 1px solid #1c5ea4;">
                         <i class="fas fa-arrow-left"></i>
                         Terug
                     </a>
@@ -30,7 +30,7 @@
             <!--Grid row-->
             <div class="row wow fadeIn">
                 <div class="col-md-12 ">
-                    <form method="POST" action="/admin/add">
+                    <form method="POST" action="{{ route('admin.post.add') }}">
                         @csrf
                         <div class="d-flex flex-column box-shadow">
                             <div class="d-flex flex-row">

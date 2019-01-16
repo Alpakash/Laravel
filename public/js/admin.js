@@ -6,6 +6,7 @@ $(document).ready(function(){
         if($(this).height() > highestBox) {
             highestBox = $(this).height();
         }
+        console.log(highestBox);
     });
 
     // Set the height of all those children to whichever was highest

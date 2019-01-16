@@ -9,6 +9,7 @@
 <script type="text/javascript" src="{{ asset('js/mdb.min.js') }}"></script>
 <!-- Initializations -->
 <script type="text/javascript" src="{{ asset('js/admin.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/auth.js') }}"></script>
 
 <script type="text/javascript" src="{{ asset('DataTables/datatables.min.js') }}"></script>
 

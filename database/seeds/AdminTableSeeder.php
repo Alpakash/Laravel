@@ -15,7 +15,6 @@ class AdminTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'team11',
             'lastName' => 'cd',
-            'verified' => 1,
             'email_verified_at' => Carbon::now()->toDateTimeString(),
             'email' => '999games@gmail.com',
             'password' => bcrypt('Admin123!'),

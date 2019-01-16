@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Temp;
+use App\Tempuser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +19,7 @@ class AdminController extends Controller
     {
         // select al users
         $users = User::where('role_id', '=', 3)->OrderBy('created_at', 'desc')->take(5)->get();
+
         // select loged in user based on unipue email
         $roleWithRole = User::where([['email','=', Auth::user()->email], ['name', '=', Auth::user()->name]])->with(['Role'])->first();
         $role = $roleWithRole->Role->role;
@@ -49,5 +52,27 @@ class AdminController extends Controller
         }
         return redirect()->back()->with('msg-success', 'Er is een mail verstuurd naar zojuist door u toegevoegde gebruiker');
         
+    }
+
+    public function permission()
+    {
+        $users = User::where('role_id', 2 )->orWhere('role_id', 3)->orderBy('role_id', 'asc')->get();
+        return view('admin.permissions', compact('users'));
+    }
+
+    public function updatePermission(Request $request, $id)
+    {
+        $roleid = $request->role_id;
+        if(!empty($roleid) && $roleid == 2 || $roleid == 3){
+            $user = User::find($id);
+            if($user){
+                $user->role_id = $roleid;
+                $user->save();
+                return Redirect::back()->with('msg-success', "permissie gewijzigd voor {$user->email}");
+            }
+            return redirect()->back()->with('msg-danger', 'gebruiker bestaat niet');
+        }
+        return redirect()->back()->with('msg-danger', 'Er is iets misgegaan.');
+
     }
 }

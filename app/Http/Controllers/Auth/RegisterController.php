@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Tempuser;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -9,7 +10,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Foundation\Testing\HttpException;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Carbon;
+use App\Temp;
 
 class RegisterController extends Controller
 {
@@ -56,10 +58,26 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'lastName' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'password' => ['string', 'min:6', 'confirmed'],
             'g-recaptcha-response' => 'required',
         ]);
 
+    }
+
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    public function tempValidator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'lastName' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'g-recaptcha-response' => 'required',
+        ]);
     }
 
     /**
@@ -92,10 +110,24 @@ class RegisterController extends Controller
             'lastName' => $data['lastName'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'verified' => 1,
             'email_verified_at' => $data['email_verified_at'],
+            'created_at' => $data['created_at'],
             'role_id' => $data['role_id']
         ]);
         return User::findOrFail($id);
     }
+
+    protected function tempuserCreate(array $data)
+    {
+        return DB::table('users')->insertGetId([
+            'name' => $data['name'],
+            'lastName' => $data['lastName'],
+            'email' => $data['email'],
+            'password' => null,
+            'email_verified_at' => Carbon::now()->toDateTimeString(),
+            'created_at' => Carbon::now()->toDateTimeString(),
+            'role_id' => 3
+        ]);
+    }
+
 }

@@ -11,14 +11,14 @@
 
                    <ul class="quick-nav">
                        <li>
-                           <a href="" class="ft-20 text-black-50">
+                           <a href="{{ route('admin') }}" class="ft-20 text-black-50">
                                <i class="fas fa-home"></i>
                            </a>
                        </li>
-                       <li><a href="" class="text-black-50">/ Deelnemer</a></li>
-                       <li><a href="">/ Account wijzig</a></li>
+                       <li><a href="{{ route("admin.$name") }}" class="text-black-50">/ gebruikers</a></li>
+                       <li><a href="#">/ Account wijzig</a></li>
                    </ul>
-                    <a href='/admin/deelnemers/{{$user->id}}' class="btn bg-white text-home-blue no-box-shadow p-2 no-radius" style="border: 1px solid #1c5ea4;">
+                    <a href='javascript:history.back()' class="btn bg-white text-home-blue no-box-shadow p-2 no-radius" style="border: 1px solid #1c5ea4;">
                         <i class="fas fa-arrow-left"></i>
                         Terug
                     </a>
@@ -30,7 +30,7 @@
             <!--Grid row-->
             <div class="row wow fadeIn">
                 <div class="col-md-12 ">
-                    <form method="POST" action="/admin/deelnemers/{{ $user->id }}/edit">
+                    <form method="POST" action="{{ route("admin.post.$name.edit", $user->id) }}">
                         @csrf
                         <div class="d-flex flex-column box-shadow">
                             <div class="d-flex flex-row">

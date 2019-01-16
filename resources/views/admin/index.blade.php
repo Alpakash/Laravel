@@ -84,33 +84,6 @@
                         </div>
                     </div>
                 </div>
-                {{--<div class="col-lg-4 col-md-4 col-sm-12 mt-4">--}}
-                    {{--<div class="card d-flex flex-column">--}}
-                        {{--<div class="card-body d-flex flex-column justify-content-center align-items-center">--}}
-                            {{--<div class="header-wrap d-flex justify-content-center align-items-center" style="border-color: #0ec03d;">--}}
-                                {{--<span class="font-weight-bold"  style="color: #0ec03d;">2</span>--}}
-                            {{--</div>--}}
-                            {{--<span class="mt-4 header-body">--}}
-                                {{--Judges--}}
-                             {{--</span>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-
-                {{--</div>--}}
-                {{--<div class="col-lg-4 col-md-4 col-sm-12 mt-4">--}}
-                    {{--<div class="card d-flex flex-column">--}}
-                        {{--<div class="card-body d-flex flex-column justify-content-center align-items-center">--}}
-                            {{--<div class="header-wrap d-flex justify-content-center align-items-center" style="border-color: #bf8f03;">--}}
-                                {{--<span class="font-weight-bold"  style="color: #bf8f03;">1</span>--}}
-                            {{--</div>--}}
-                            {{--<span class="mt-4 header-body" >--}}
-                                {{--Admin--}}
-                        {{--</span>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-
-                {{--</div>--}}
-
             </div>
             <!--Grid row-->
 
@@ -121,21 +94,13 @@
                 <div class="card-body d-sm-flex justify-content-between">
 
                     <h4 class="mb-2 mb-sm-0 d-flex align-items-center text-home-blue">
-                        <a href="https://mdbootstrap.com/docs/jquery/" target="_blank">Rijst deelnemers</a>
+                        <a href="https://mdbootstrap.com/docs/jquery/" target="_blank">laatst toegevoegde deelnemers</a>
                     </h4>
                     <div class="d-flex">
-                        <button class="btn bg-white btn-home-hover mr-3 text-black-50 btn-sm my-0 p no-radius border-light no-box-shadow" type="submit">
+                        <a href="{{ route('admin.add') }}" class="btn bg-white btn-home-hover mr-3 text-black-50 btn-sm my-0 p no-radius border-light no-box-shadow" >
                             <i class="fas fa-plus"></i>
                             Deelnemer
-                        </button>
-                        <form class="d-flex justify-content-center m-0">
-                            <!-- Default input -->
-                            <input type="search" placeholder="Zoek gebruikers" aria-label="Search" class="form-control no-radius">
-                            <button class="btn bg-home btn-sm my-0 p no-radius" type="submit">
-                                <i class="fa fa-search"></i>
-                            </button>
-
-                        </form>
+                        </a>
                     </div>
 
 
@@ -202,7 +167,7 @@
 
                         </div>
                         <div class="card-footer bg-white text-right">
-                            <a href='admin/deelnemers' class="btn bg-home btn-sm p no-radius text-white" >
+                            <a href='{{route('admin.users')}}' class="btn bg-home btn-sm p no-radius text-white" >
                                 <i class="fas fa-users mr-2"></i>
                                 <span>Meer deelnemers</span>
                             </a>
@@ -210,31 +175,6 @@
 
                     </div>
                     <!--/.Card-->
-
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col-md-3 mb-4">
-
-                    <!--Card-->
-                    <div class="card mb-4">
-
-                        <!-- Card header -->
-                        <div class="card-header text-center">
-                            Pie chart
-                        </div>
-
-                        <!--Card content-->
-                        <div class="card-body">
-
-                            <canvas id="pieChart"></canvas>
-
-                        </div>
-
-                    </div>
-                    <!--/.Card-->
-
 
                 </div>
                 <!--Grid column-->

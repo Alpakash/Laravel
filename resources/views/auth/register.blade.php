@@ -60,8 +60,13 @@
                         <small class="text-danger ">{{ $errors->first('email') }}</small>
                     </div>
                     @endif
+                    <div class="form-element text-right">
+                        <a class="passwordToggle text-primary w-100">
+                            met wachtwoord <i class="fas fa-angle-down"></i>
+                        </a>
+                    </div>
 
-                    <div class="form-element">
+                    <div class="form-element password">
                         <label class="sr-only" >wachtwoord</label>
                         <div class="input-group mb-2  h-100">
                             <div class="input-group-prepend h-100">
@@ -69,13 +74,13 @@
                                     <i class="fas fa-unlock ft-20 text-home-blue"></i>
                                 </div>
                             </div>
-                            <input type="password" name="password"  class="form-control ft-18 {{ $errors->has('password') ? ' is-invalid' : '' }} no-radius py-0 p-4" required  placeholder="wachtwoord"
+                            <input type="password" name="password"  class="form-control ft-18  {{ $errors->has('password') ? ' is-invalid' : '' }} no-radius py-0 p-4" placeholder="wachtwoord"
                                    oninvalid="this.setCustomValidity('Wachtwoord dient ingevuld te zijn')" oninput="setCustomValidity('')">
                         </div>
                         <small class="text-danger ">{{ $errors->first('password') }}</small>
                     </div>
 
-                    <div class="form-element">
+                    <div class="form-element password">
                         <label class="sr-only" >wachtwoord</label>
                         <div class="input-group mb-2  h-100">
                             <div class="input-group-prepend  h-100">
@@ -83,7 +88,7 @@
                                     <i class="fas fa-lock ft-20 text-home-blue"></i>
                                 </div>
                             </div>
-                            <input type="password" name="password_confirmation"  class="form-control ft-18 no-radius py-0 p-4" required  placeholder="wachtwoord">
+                            <input type="password" name="password_confirmation"  class="form-control ft-18 no-radius py-0 p-4" placeholder="wachtwoord">
                         </div>
                     </div>
                     <div class="row " >

@@ -21,7 +21,7 @@
                         @csrf
                         <div class="d-flex flex-column justify-content-center m-2">
                             <i class="fas fa-unlock-alt m-2" style="font-size: 40px;color: #41bf5d;"></i>
-                            <span class="p-2">Oops je bent je wachtwoord vergeten. Voer je email-addres in en klik op de knop
+                            <span class="p-2">Voer je email-addres in en klik op de knop
                                 <b>Verzend mail</b> om wachtwoord te resetten</span>
                         </div>
                         <div class="form-element  p-2">

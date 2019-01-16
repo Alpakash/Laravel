@@ -12,3 +12,7 @@
   border: unset;
 }
 
+.password{
+  display: none;
+}
+

@@ -2,23 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Tempuser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Role;
 use Illuminate\Support\Facades\Redirect;
-
+use Illuminate\Support\Collection;
 class AdminUserController extends Controller
 {
+
     /**
      * Show user index page
      *
      */
 
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::where('role_id', '=', 3)->with(['Role'])->get();
-        return view('admin.users.index', compact('users'));
+        $roleid = 3;
+        $users = User::where('role_id', '=', $roleid)->with(['Role'])->get();
+        if(!$users) return Redirect::back()->with('msg-danger', 'gebruikers niet gevonden');
+        return view('admin.users.index', compact('users', 'roleid'))->with('name', 'users');
     }
 
     /**
@@ -33,7 +37,7 @@ class AdminUserController extends Controller
         if(!$user){
             return redirect('admin');
         }
-        return view('admin.users.details', compact('user'));
+        return view('admin.users.details', compact('user'))->with('name', 'users');
     }
     /**
      * show user edit form
@@ -47,14 +51,16 @@ class AdminUserController extends Controller
         if(!$user){
             return redirect('admin');
         }
-        return view('admin.users.edit', compact('user'));
+        return view('admin.users.edit', compact('user'))->with('name', 'users');
     }
+
+
     /**
      * Store instance for the edit
      *
      *
      */
-    public function store(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
         $input = $request->all();

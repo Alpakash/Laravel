@@ -42,11 +42,16 @@
                         </div>
                         <small class="text-danger pl-4">{{ $errors->first('password') }}</small>
                     </div>
+                    @if(Session::has('msg-login'))
+                    <div class="form-element text-left w-100">
+                        {!! session('msg-login') !!}
+                    </div>
+                    @endif
                     <div class="form-group mt-4">
                         <div class="d-flex justify-content-between w-100">
                             <div class="d-flex align-items-center text-left">
                                 <a class="p-1" href="{{ route('password.request') }}">
-                                {{ __('Wachtwoord vergeten?') }}
+                                    {{ (Session::has('msg-login')) ? 'wachtwoord aanvragen' : 'wachtwoord vergeten?'   }}
                                 </a>
                             </div>
                             <div class="d-flex">

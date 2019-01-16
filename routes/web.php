@@ -50,15 +50,27 @@ Route::group(['middleware' => 'auth'], function(){
     Route::group(['middleware' => ['admin']], function(){
         // admin dashboard
         Route::get('/admin', 'AdminController@index')->name('admin');
-        Route::get('/admin/add', 'AdminController@create');
+        Route::get('/admin/add', 'AdminController@create')->name('admin.add');
 
         // admin users
-        Route::get('/admin/deelnemers/', 'AdminUserController@index');
-        Route::get('/admin/deelnemers/{id}', 'AdminUserController@details');
-        Route::get('/admin/deelnemers/{id}/edit', 'AdminUserController@edit');
+        Route::get('/admin/users/', 'AdminUserController@index')->name('admin.users');
+        Route::get('/admin/judges/', 'AdminJudgeController@index')->name('admin.judges');
 
-        Route::post('/admin/deelnemers/{id}/edit', 'AdminUserController@store');
-        Route::post('/admin/add', 'AdminController@store');
+        Route::get('/admin/users/{id}', 'AdminUserController@details')->name('admin.users.show');
+        Route::get('/admin/judges/{id}', 'AdminJudgeController@details')->name('admin.judges.show');
+
+        Route::get('/admin/users/{id}/edit', 'AdminUserController@edit')->name('admin.users.edit');
+        Route::get('/admin/judges/{id}/edit', 'AdminJudgeController@edit')->name('admin.judges.edit');
+
+        Route::get('/admin/permissions', 'AdminController@permission')->name('admin.permissions');
+        Route::post('/admin/permissions/{id}', 'AdminController@updatePermission')->name('admin.post.permissions');
+
+        Route::post('/admin/users/{id}/edit', 'AdminUserController@update')->name('admin.post.users.edit');
+        Route::post('/admin/judges/{id}/edit', 'AdminJudgeController@update')->name('admin.post.judges.edit');
+
+        Route::post('/admin/add', 'AdminController@store')->name('admin.post.add');
+
+        Route::get('downloadExcel/{roleid}', 'ExcelController@downloadExcel')->name('excel.users');
 
         // admin judges
     });

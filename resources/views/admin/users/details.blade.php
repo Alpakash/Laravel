@@ -12,7 +12,7 @@
                     <h4 class="mb-2 mb-sm-0 d-flex align-items-center">
                         Account details
                     </h4>
-                    <a href='/admin/deelnemers' class="btn bg-white text-home-blue no-box-shadow p-2 no-radius" style="border: 1px solid #1c5ea4;">
+                    <a href='javascript:history.back()' class="btn bg-white text-home-blue no-box-shadow p-2 no-radius" style="border: 1px solid #1c5ea4;">
                         <i class="fas fa-arrow-left"></i>
                         Terug
                     </a>
@@ -25,20 +25,20 @@
             <div class="row wow fadeIn">
 
                 <!--Grid column-->
-                <div class="col-md-3 mb-4">
+                <div class="col-md-3 mb-4 h-100">
 
                     <!--Card-->
-                    <div class="card  ">
+                    <div class="card  account-card">
 
                         <!--Card content-->
                         <div class="card-body d-flex justify-content-between align-items-center flex-column">
                             <div class="text-center d-flex flex-column">
                                 <img src="{{asset('img/avatars/pf.png')}}" class="img-fluid" alt="Responsive image" width="150px">
-                                <small class="mt-3">{{($user->Role->role = 'User') ? 'Deelnemer' : $user->Role->role  }}</small>
+                                <small class="mt-3">{{($user->Role->role == 'User') ? 'Deelnemer' : $user->Role->role  }}</small>
                             </div>
                             <div class="d-flex">
-                                <a href="/admin/deelnemers/{{$user->id}}/edit" class="btn bg-home pt-2 pb-2 mt-4">
-                                    <i class="fas fa-pencil-alt mr-2"></i> wijzigen
+                                <a href="{{ route("admin.$name.edit", $user->id) }}" class="btn bg-home pt-2 pb-2 mt-4">
+                                    wijzigen
                                 </a>
                             </div>
                         </div>
@@ -50,10 +50,10 @@
                 <!--Grid column-->
 
                 <!--Grid column-->
-                <div class="col-md-9 mb-4">
+                <div class="col-md-9">
 
                     <!--Card-->
-                    <div class="card mb-4 account-card">
+                    <div class="card  account-card">
                         <!--Card content-->
                         <div class="card-body">
                             <div class="d-grid grid-column-2 account-info">
@@ -65,14 +65,14 @@
                                 <div class="grid-item p-2 pt-3">{{ $user->email }}</div>
                                 <div class="grid-item p-2 pt-3 font-weight-bold">Geactiveerd</div>
                                 <div class="grid-item p-1 d-flex flex-row align-items-center">
-                                    <span class="checkIcon checkIcon{{ ($user->verified == 1)? 'Green' : 'Red' }} round-btn">
+                                    <span class="checkIcon checkIcon{{ ($user->email_verified_at)? 'Green' : 'Red' }} round-btn">
                                         <a class="btn d-flex justify-content-center align-items-center p-0">
-                                            <i class="fas fa-{{ ($user->verified == 1)? 'check' : 'times' }}"></i>
+                                            <i class="fas fa-{{ ($user->email_verified_at)? 'check' : 'times' }}"></i>
                                         </a>
                                     </span>
                                 </div>
-                                <div class="grid-item p-2 pt-3 font-weight-bold">Gemaakt op</div>
-                                <div class="grid-item p-2 pt-3">{{ $user->created_at }}</div>
+                                <div class="grid-item p-2 pt-3 font-weight-bold">Permissie</div>
+                                <div class="grid-item p-2 pt-3">{{($user->Role->role == 'User') ? 'Deelnemer' : $user->Role->role  }}</div>
                             </div>
 
                         </div>
