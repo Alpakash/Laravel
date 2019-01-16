@@ -11,15 +11,12 @@
 |
 */
 
-
 Route::get('/', 'HomeController@index' );
 Route::get('/home', 'HomeController@index' );
 
 Route::get('countdown', 'TestController@response');
 
 Route::get('error', 'TestController@error');
-
-Route::get('profile', 'HomeController@index')->name('home');
 
 Route::get('news', 'HomeController@news');
 Route::get('faq', 'HomeController@faq');
@@ -33,13 +30,9 @@ Route::get('projects', 'ProjectsController@index');
 Route::post('register', 'Auth\RegisterController@register');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-// Routes voor de countdown timer create, pause, resume and reset
-Route::post('/countdown', 'CountdownController@create');
-Route::post('/cdpause', 'CountdownController@pause');
-Route::post('/cdpause2', 'CountdownController@pause2');
-Route::post('/cdresume', 'CountdownController@resume');
-Route::post('/cdreset', 'CountdownController@reset');
-//Route::resources('judge', 'JudgeController');
+Route::get('/error', 'TestController@error');
+
+Auth::routes();
 
 Auth::routes(['verify' => true]);
 
@@ -77,17 +70,33 @@ Route::group(['middleware' => 'auth'], function(){
 });
 
 Route::get('/welcome', 'TestController@index');
+Route::get('/profile', 'AccountController@profile')->name('home');
+Route::get('/judge', 'AccountController@judge');
 
-// Als je route sparkpost bezoekt wordt er een mail gestuurd met
-// de layout uit views/emails/test.blade.php
-Route::get('/sparkpost', function () {
-    Mail::send('emails.test', [], function ($message) {
-      $message
-        ->from('info@bounces.veggiecoder.com', 'Kakashi')
-        ->to('nguyen.netwerk@gmail.com', 'Akashhhh')
-        ->subject('From SparkPost with ❤');
-    });
+Route::post('/register', 'Auth\RegisterController@register');
 
-    return redirect('/');
-  });
+Route::resource('/judge','JudgeController');
+Route::resource('/admin/news', 'NewsController');
+Route::get('/tableSize', 'TempController@tableSize');
+Route::get('/tournamentPoints', 'TempController@tournamentPoints');
+Route::get('/points', 'TempController@points');
+Route::get('/tablesPreliminaryRoundRandom', 'TempController@tablesPreliminaryRoundRandom');
+Route::get('/tablesPreliminaryRoundFromPoints', 'TempController@tablesPreliminaryRoundFromPoints');
+Route::get('/tablesKnockout', 'TempController@tablesKnockout');
 
+// Routes voor de countdown timer create, pause, resume and reset
+Route::post('/countdown', 'CountdownController@create');
+Route::post('/cdpause', 'CountdownController@pause');
+Route::post('/cdpause2', 'CountdownController@pause2');
+Route::post('/cdresume', 'CountdownController@resume');
+Route::post('/cdreset', 'CountdownController@reset');
+
+
+Route::post('/generateRound', 'HomeController@generateTables');
+Route::post('/gamePoints', 'HomeController@assignGamePoints');
+
+Auth::routes(['verify' => true]);
+
+Route::resource('/score/{tableid}', 'ScoreInputController', [
+    'except' => ['delete', 'show', 'store']
+]);

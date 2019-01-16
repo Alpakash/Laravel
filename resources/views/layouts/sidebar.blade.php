@@ -3,7 +3,7 @@
     <!-- Sidebar -->
     <div id="sidebar" class="sidebar-fixed position-fixed">
 
-        <a class=" pt-0  pb-4 pr-4 pl-4 waves-effect">
+        <a href="{{url('/')}}" class=" pt-0  pb-4 pr-4 pl-4 waves-effect">
             <img src="https://upload.wikimedia.org/wikipedia/it/3/38/Carcassonne_Logo.png" class="img-fluid" alt=""  width="200px">
         </a>
         <hr class="w-100 mt-0 mb-0" />
@@ -32,6 +32,8 @@
                 <i class="fa fa-table mr-3"></i>Judges</a>
             <a href="{{ route('admin.permissions') }}" class="list-group-item list-group-item-action">
                 <i class="fa fa-money mr-3"></i>Permissies</a>
+            <a href="{{url('/admin/news/create')}}" class="list-group-item list-group-item-action">
+                <i class="fa fa-newspaper mr-3"></i>Post creëren</a>
         </div>
 
         <div class="position-absolute w-100" style="bottom:0;left:0;">

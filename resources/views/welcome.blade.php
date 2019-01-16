@@ -82,7 +82,11 @@
         </style>
     </head>
     <body>
+
+
         <div class="flex-center position-ref full-height">
+
+
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
@@ -109,8 +113,14 @@
             @endif
 
             <div class="content">
+
                  <img src="https://spellenspektakel.nl/wp-content/uploads/2015/10/999-Games-Logo_web-10cm-vierkant-280x280.png" width="150px"> 
                 <div class="title m-b-md">
+                    <!-- Countdown Timer JavaScript-->
+                    <div style="font-size: 40px; margin-top: 30px; font-weight: bold;">
+                        @include('layouts.countdown')
+                    </div>
+
                   Carcassonne
                 </div>
 
@@ -156,12 +166,15 @@ Vanaf 1998 begeeft het bedrijf zich op het uitgeverspad met een nieuwe generatie
                     <a class="linkColorHover" href="/faq">FAQ</a>
                     <a class="linkColorHover" href="/scores">Scores</a>
                     <a class="linkColorHover" href="/admins">Admins</a>
-                    
                 </div>
             </div>
+
         </div>
 
-          <!-- Optional JavaScript -->
+
+
+
+        <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

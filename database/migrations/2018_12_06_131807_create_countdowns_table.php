@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Countdown extends Migration
+class CreateCountdownsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -22,7 +22,7 @@ class Countdown extends Migration
             $table->timestamp('paused_at')->nullable();
             $table->timestamp('resumed_at')->nullable();
             $table->timestamps();
-            });
+        });
     }
 
     /**

@@ -10,6 +10,7 @@ namespace App;
 
 use App\Dto\TableSize;
 use App\Dto\StatUser;
+use Illuminate\Support\Facades\DB;
 
 class Calculation
 {
@@ -36,23 +37,24 @@ class Calculation
             new TableSize(floor($userCount / 4), 4)
         ];
 
-        if ($mod === 1){
+        if ($mod === 1 && intval($tableSize[0]->amountOfTables) === 1){
             $tableSize[0]->amountOfTables -= 1;
-            $tableSize[] = new TableSize(1, 5);
-            if($tableSize[0]->amountOfTables === 0.0)
-                array_shift($tableSize);
+            $tableSize[] = new TableSize(1, 3);
+            $tableSize[] = new TableSize(1, 2);
+        }
+        else if ($mod === 1){
+            $tableSize[0]->amountOfTables -= 2;
+            $tableSize[] = new TableSize(3, 3);
         }
         else if ($mod === 2){
             $tableSize[0]->amountOfTables -= 1;
             $tableSize[] = new TableSize(2, 3);
-            if($tableSize[0]->amountOfTables === 0.0)
-                array_shift($tableSize);
         }
-        else if ($mod === 3){
-            if($tableSize[0]->amountOfTables === 0.0)
-                array_shift($tableSize);
+        else if ($mod === 3)
             $tableSize[] = new TableSize(1, 3);
-        }
+
+        if($tableSize[0]->amountOfTables === 0.0)
+            array_shift($tableSize);
 
         return $tableSize;
     }
@@ -64,40 +66,23 @@ class Calculation
      */
     public function tournamentPoints(int $tableSize){
         switch ($tableSize){
-            case 6:
-                return [
-                    13,
-                    11,
-                    9,
-                    6,
-                    3,
-                    1
-                ];
-            case 5:
-                return [
-                    13,
-                    10,
-                    7,
-                    4,
-                    1
-                ];
             case 4:
                 return [
-                    13,
-                    9,
                     5,
+                    3,
+                    2,
                     1
                 ];
             case 3:
                 return [
-                    13,
-                    7,
-                    1
+                    5,
+                    3,
+                    2
                 ];
             case 2:
                 return [
-                    13,
-                    1
+                    5,
+                    3
                 ];
             default:
                 return [];
@@ -115,27 +100,42 @@ class Calculation
         //If absences place last
         $userCount = count($users);
         if ($userCount !== count($tournamentPoints))
-            throw new \InvalidArgumentException('The amount of people and and the amount of points are not equal.');
+            throw new \InvalidArgumentException('The amount of people and and the amount of tournament points are not equal.');
         else if ($userCount === 0)
             throw new \InvalidArgumentException('No users given.');
 
-        usort($users, array($this, "scoreCompare"));
+        $playedUsers = [];
+        $notPlayedUsers = [];
+        foreach ($users as $user){
+            if ($user->last)
+                $notPlayedUsers[] = $user;
+            else
+                $playedUsers[] = $user;
+        }
+
+        usort($playedUsers, array($this, "scoreCompare"));
+        usort($notPlayedUsers, array($this, "scoreCompare"));
         rsort($tournamentPoints);
 
-        $totalScore = array_reduce($users,
-            function(int $i = null, StatUser $user) {
-                if($i === null)
-                    return $user->score;
-                return $i + $user->score;
-            }
-        );
+        $users = array_merge($playedUsers, $notPlayedUsers);
+
+        $totalScore = array_reduce($users, array($this, "totalScore"));
 
         for ($i = 0; $i < $userCount; $i++){
-            if ($users[$i]->score === $users[$i + 1]->score){
-                $points = $tournamentPoints[$i] + $tournamentPoints[$i + 1];
-                $this->assignPoints($users, $i, $totalScore, $points);
-                $i++;
-                $this->assignPoints($users, $i, $totalScore, $points);
+            $score = $users[$i]->score;
+            $sameScore = array_filter($users, function(StatUser $user) use ($score){
+                return $user->score === $score && !$user->last;
+            });
+
+            $sameScoreCount = count($sameScore);
+            if ($sameScoreCount > 1){
+                $sameTournamentPoints = array_slice($tournamentPoints, $i, $i + $sameScoreCount);
+                $averageTournamentPoints = array_sum($sameTournamentPoints) / $sameScoreCount;
+
+                for ($n = $i; $n < $sameScoreCount; $n++)
+                    $this->assignPoints($users, $n, $totalScore, $averageTournamentPoints);
+
+                $i = $n;
             }
             else
                 $this->assignPoints($users, $i, $totalScore, $tournamentPoints[$i]);
@@ -155,14 +155,27 @@ class Calculation
         if ($a->score === $b->score)
             return 0;
 
-        return ($a->score < $b->score) ? -1 : 1;
+        return ($a->score < $b->score) ? 1 : -1;
+    }
+
+    /**
+     * This function is used for getting the total score via a array reduce.
+     * @param int|null $i The previous value.
+     * @param StatUser $user The user to add the score to the total.
+     * @return int The new total score.
+     */
+    private function totalScore(int $i = null, StatUser $user)
+    {
+        if($i === null)
+            return $user->score;
+        return $i + $user->score;
     }
 
     /**
      * @param $users array The users to search in.
      * @param $id int The index of the user to assign the points to.
      * @param $totalScore int The total score of all the table.
-     * @param $tournamentPoint int The tournament points the user should get.
+     * @param $tournamentPoint float The tournament points the user should get.
      */
     private function assignPoints(&$users, $id, $totalScore, $tournamentPoint)
     {
@@ -194,12 +207,71 @@ class Calculation
             $availableSpace += $tableSize->amountOfTables * $tableSize->tableSize;
         }
 
-        if (count($users) !== $availableSpace)
-            throw new \InvalidArgumentException('There will be an amount of people left over with this table size.');
+        $userCount = count($users);
+        if ($userCount === 0)
+            try {
+                return view('layouts.scores');
+            } catch (\Exception $e) {
+            throw new \InvalidArgumentException("No users given. {$e}");
+            }
+        if ($userCount !== intval($availableSpace))
+            throw new \InvalidArgumentException('There will be an amount of people left over with these table sizes.');
 
         shuffle($users);
 
         return $this->defineTables($users, $tableSizes);
+    }
+
+
+    /**
+     * Split the users over tables without random layout.
+     * @param array $users The users to split over each table.
+     * @param array $tableSizes The size of each table.
+     * @return array The users of each table.
+     */
+    public function tablesPreliminaryRound(array $users, array $tableSizes)
+    {
+        $availableSpace = 0;
+        foreach ($tableSizes as $tableSize){
+            $availableSpace += $tableSize->amountOfTables * $tableSize->tableSize;
+        }
+
+        $userCount = count($users);
+        if ($userCount === 0)
+            throw new \InvalidArgumentException('No users given.');
+        if ($userCount !== intval($availableSpace))
+            throw new \InvalidArgumentException('There will be an amount of people left over with these table sizes.');
+
+
+        return $this->defineTables($users, $tableSizes);
+    }
+
+    public function generateTables() {
+        $calculation = new \App\Calculation();
+
+        $users = User::all()->toArray();
+        $allUsers = [];
+
+        foreach ($users as $user) {
+            $allUsers[] = $user['id'];
+        }
+
+        $totalUsers = count($allUsers);
+        $usersPerTable = $calculation->tablesPreliminaryRoundRandom($allUsers, $calculation->tableSize($totalUsers));
+        $totalTables = count($usersPerTable);
+
+        DB::table('tables_users')->truncate();
+
+        for($i=0; $i < $totalTables; $i++) {
+            foreach($usersPerTable[$i] as $users_id) {
+                DB::table('tables_users')->insert([
+                    ['table_id' => ($i+1), 'user_id' => $users_id]
+                ]);
+            }
+        }
+
+        return redirect('/scores');
+
     }
 
     /**
@@ -214,12 +286,12 @@ class Calculation
         foreach ($tableSizes as $tableSize){
             $availableSpace += $tableSize->amountOfTables * $tableSize->tableSize;
         }
-        
+
         $userCount = count($users);
         if ($userCount === 0)
             throw new \InvalidArgumentException('No users given.');
-        else if ($userCount != $availableSpace)
-            throw new \InvalidArgumentException('There will be an amount of people left over with this table size.');
+        else if ($userCount != intval($availableSpace))
+            throw new \InvalidArgumentException('There will be an amount of people left over with these table sizes.');
 
 
         $users = $this->orderUsers($users);
@@ -256,15 +328,16 @@ class Calculation
     public function tablesKnockout(array $users)
     {
         $userCount = count($users);
-        if ($userCount % 2 !== 0)
-            throw new \InvalidArgumentException('Not an even amount of users required for the knockout phase.');
-        else if ($userCount === 0)
-            throw new \InvalidArgumentException('No users given.');
 
-        if ($userCount > 16){
-            $users = $this->orderUsers($users);
-            $users = array_slice($users, 0, 16);
-        }
+        if ($userCount === 0)
+            throw new \InvalidArgumentException('No users given.');
+        else if (($userCount & ($userCount - 1)) == 0)
+            throw new \InvalidArgumentException('With the amount of people given for the knockout phase there will be people left over.');
+
+        if ($userCount === 2)
+            return [
+                $users
+            ];
 
         $users = $this->orderUsers($users);
 
@@ -276,37 +349,20 @@ class Calculation
         $evenUsers = $this->splitUsers($evenUsers);
 
         $firstHalfOddUsers = $oddUsers[0];
-        $secondHalfOddUsers = $oddUsers[1];
+        $secondHalfOddUsers = array_reverse($oddUsers[1]);
         $firstHalfEvenUsers = $evenUsers[0];
-        $secondHalfEvenUsers = $evenUsers[1];
-
-        $secondHalfOddUsers = array_reverse($secondHalfOddUsers);
-        $secondHalfEvenUsers = array_reverse($secondHalfEvenUsers);
+        $secondHalfEvenUsers = array_reverse($evenUsers[1]);
 
         $oddUsers = array_merge($firstHalfOddUsers, $secondHalfOddUsers);
         $evenUsers = array_merge($firstHalfEvenUsers, $secondHalfEvenUsers);
         $evenUsers = array_reverse($evenUsers);
 
-        $userCount = count($oddUsers);
-
-        $oddUsersTable = [];
-        $evenUsersTable = [];
-
-        for ($i = 0; $i < $userCount; $i += 2){
-            $oddUsersTable[] = [
-                $oddUsers[$i],
-                $oddUsers[$i + 1]
-            ];
-
-            $evenUsersTable[] = [
-                $evenUsers[$i],
-                $evenUsers[$i + 1]
-            ];
-        }
+        $oddUsers = array_chunk($oddUsers, 2);
+        $evenUsers = array_chunk($evenUsers, 2);
 
         return [
-            $oddUsersTable,
-            $evenUsersTable
+            $oddUsers,
+            $evenUsers
         ];
     }
 

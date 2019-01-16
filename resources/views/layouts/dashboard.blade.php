@@ -22,25 +22,52 @@
             <!-- Links -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                <!-- Left -->
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item ">
-                        <a class="nav-link waves-effect" href="#">Home
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Authentication Links -->
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            @if (Route::has('register'))
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            @endif
+                        </li>
+                    @else
 
-                </ul>
+                        <li class="nav-item">
+                            <a href="/"><button class="btn btn-danger mr-3"><i class="fa fa-book"></i> Profile</button></a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class=" dropdown-toggle btn btn-warning" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <i class="fas fa-user"></i>  {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/news">
+                                    <i class="far fa-newspaper"></i>  News
+                                </a>
+                                <a class="dropdown-item" href="/faq">
+                                    <i class="fas fa-question"></i> FAQ
+                                </a>
+                                <a class="dropdown-item" href="/scores">
+                                    <i class="far fa-star"></i>  Scores
+                                </a>
+                                <a class="dropdown-item" href="/judge">
+                                    <i class="fas fa-crown"></i> Judge
+                                </a>
 
-                <!-- Right -->
-                <ul class="navbar-nav nav-flex-icons">
-
-                    <li class="nav-item">
-                        <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="nav-link border border-light rounded waves-effect"
-                           target="_blank">
-                            <i class="fa fa-github mr-2"></i>Home
-                        </a>
-                    </li>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                    <i class="fas fa-sign-out-alt"></i>  {{ __('Logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    @endguest
                 </ul>
 
             </div>

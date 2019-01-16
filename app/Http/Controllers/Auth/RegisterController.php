@@ -61,7 +61,6 @@ class RegisterController extends Controller
             'password' => ['string', 'min:6', 'confirmed'],
             'g-recaptcha-response' => 'required',
         ]);
-
     }
 
     /**

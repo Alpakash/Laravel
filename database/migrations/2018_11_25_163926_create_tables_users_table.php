@@ -17,9 +17,9 @@ class CreateTablesUsersTable extends Migration
             $table->increments('id');
             $table->integer('table_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->integer('game_points')->unsigned();
-            $table->integer('weight')->unsigned();
-            $table->integer('tournament_points')->unsigned();
+            $table->integer('game_points')->unsigned()->nullable();
+            $table->integer('weight')->unsigned()->nullable();
+            $table->integer('tournament_points')->unsigned()->nullable();
             $table->timestamps();
         });
     }
