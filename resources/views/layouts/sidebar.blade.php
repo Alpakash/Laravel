@@ -50,7 +50,7 @@
                     <i class="fas fa-cog"></i>
                     <span class="ft-15 p-2">account</span>
                 </a>
-                <a class="border-light home-hover d-flex flex-column justify-content-center align-items-center w-100 p-3 toggle-text" href="/logout">
+                <a class="border-light home-hover d-flex flex-column justify-content-center align-items-center w-100 p-3 toggle-text" href="{{url('/logout')}}">
                     <i class="fas fa-power-off"></i>
                     <span class="ft-15 p-2">Logout</span>
                 </a>

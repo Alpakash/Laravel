@@ -82,7 +82,7 @@ class NewsController extends Controller
     {  
            //Validate
         $this->validate($request, [
-        'title'=>'required|max:10',
+        'title'=>'required|max:50',
         'desc'=>'required'
         ]);
         

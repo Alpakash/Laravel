@@ -124,13 +124,13 @@
                     <hr class="w-100 mt-2 mb-2" />
                     <div class="d-flex text-home-blue justify-content-between">
                         <div class="d-flex align-items-center" style="width: 40%">
-                            <a href='/welcome' class="btn bg-white btn-home-hover text-home-blue no-box-shadow p-2 no-radius" style="border: 1px solid #1c5ea4;">
+                            <a href="{{url('/welcome')}}" class="btn bg-white btn-home-hover text-home-blue no-box-shadow p-2 no-radius" style="border: 1px solid #1c5ea4;">
                                 <i class="fas fa-arrow-left"></i>
                                 Home
                             </a>
                         </div>
                         <div class="d-flex text-right ">
-                            <a href="/login" class="d-flex align-items-center w-100 text-right ">Al een account? log in</a>
+                            <a href="{{url('/login')}}" class="d-flex align-items-center w-100 text-right ">Al een account? log in</a>
                         </div>
                     </div>
                     <hr class="w-100 mt-2 mb-2" />
@@ -145,102 +145,5 @@
         <div class="col-lg-3 col-md-2 col-sm-12"></div>
     </div>
 </div>
-{{--<div class="container">--}}
-    {{--<div class="row justify-content-center">--}}
-        {{--<div class="col-md-8">--}}
-            {{--<div class="card">--}}
-                {{--<div class="card-header">{{ __('Register') }}</div>--}}
 
-                {{--<div class="card-body">--}}
-                    {{--<form method="POST" action="{{ route('register') }}">--}}
-                        {{--@csrf--}}
-                        {{--<div class="form-group row">--}}
-                            {{--<label for="name" class="col-md-4 col-form-label text-md-right">Voornaam</label>--}}
-
-                            {{--<div class="col-md-6">--}}
-                                {{--<input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>--}}
-
-                                {{--@if ($errors->has('name'))--}}
-                                    {{--<span class="invalid-feedback" role="alert">--}}
-                                        {{--<strong>{{ $errors->first('name') }}</strong>--}}
-                                    {{--</span>--}}
-                                {{--@endif--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-
-                        {{--<div class="form-group row">--}}
-                            {{--<label for="name" class="col-md-4 col-form-label text-md-right">Achternaam</label>--}}
-
-                            {{--<div class="col-md-6">--}}
-                                {{--<input id="name" type="text" class="form-control{{ $errors->has('lastName') ? ' is-invalid' : '' }}" name="lastName" value="{{ old('lastName') }}" required autofocus>--}}
-
-                                {{--@if ($errors->has('lastName'))--}}
-                                    {{--<span class="invalid-feedback" role="alert">--}}
-                                        {{--<strong>{{ $errors->first('lastName') }}</strong>--}}
-                                    {{--</span>--}}
-                                {{--@endif--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-
-                        {{--<div class="form-group row">--}}
-                            {{--<label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>--}}
-
-                            {{--<div class="col-md-6">--}}
-                                {{--<input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>--}}
-
-                                {{--@if ($errors->has('email'))--}}
-                                    {{--<span class="invalid-feedback" role="alert">--}}
-                                        {{--<strong>{{ $errors->first('email') }}</strong>--}}
-                                    {{--</span>--}}
-                                {{--@endif--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-
-                        {{--<div class="form-group row">--}}
-                            {{--<label for="password" class="col-md-4 col-form-label text-md-right">Wachtwoord</label>--}}
-
-                            {{--<div class="col-md-6">--}}
-                                {{--<input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>--}}
-
-                                {{--@if ($errors->has('password'))--}}
-                                    {{--<span class="invalid-feedback" role="alert">--}}
-                                        {{--<strong>{{ $errors->first('password') }}</strong>--}}
-                                    {{--</span>--}}
-                                {{--@endif--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-
-                        {{--<div class="form-group row">--}}
-                            {{--<label for="password-confirm" class="col-md-4 col-form-label text-md-right">Her. wachtwoord</label>--}}
-
-                            {{--<div class="col-md-6">--}}
-                                {{--<input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-
-                        {{--<div class="form-group row {{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">--}}
-                            {{--<label class="col-md-4 control-label">Captcha</label>--}}
-                            {{--<div class="col-md-6">--}}
-                                {{--{!! app('captcha')->display() !!}--}}
-                                {{--@if ($errors->has('g-recaptcha-response'))--}}
-                                    {{--<span class="help-block">--}}
-                                        {{--<strong>{{ $errors->first('g-recaptcha-response') }}</strong>--}}
-                                    {{--</span>--}}
-                                {{--@endif--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-
-                        {{--<div class="form-group row mb-0">--}}
-                            {{--<div class="col-md-6 offset-md-4">--}}
-                                {{--<button type="submit" class="btn btn-primary">--}}
-                                    {{--{{ __('Register') }}--}}
-                                {{--</button>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</form>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-{{--</div>--}}
 @endsection

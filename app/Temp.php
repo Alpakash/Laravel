@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Temp extends Model
 {
-    protected $table = 'Temp_users';
+    protected $table = 'temp_users';
 
     protected $fillable = [
       'email', 'role_id', 'hash'

@@ -22,7 +22,7 @@
                         <hr class="w-100 mt-4 mb-4" />
                         <span class="p-2">Heb je geen mailtje ontvangen? Klik dan op de knop <b>Verzend mail</b> om een mailtje te laten onvangen.</span>
                         <div class="d-flex justify-content-between">
-                            <a href='/welcome' class="w-100 btn bg-white btn-home-hover text-home-blue no-box-shadow p-2 no-radius" style="border: 1px solid #1c5ea4;">
+                            <a href="{{url('/welcome')}}" class="w-100 btn bg-white btn-home-hover text-home-blue no-box-shadow p-2 no-radius" style="border: 1px solid #1c5ea4;">
                                 <i class="fas fa-arrow-left"></i>
                                 Home
                             </a>

@@ -125,7 +125,7 @@ class RegisterController extends Controller
             'password' => null,
             'email_verified_at' => Carbon::now()->toDateTimeString(),
             'created_at' => Carbon::now()->toDateTimeString(),
-            'role_id' => 3
+            'role_id' => $data['role_id']
         ]);
     }
 

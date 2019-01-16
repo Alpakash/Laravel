@@ -40,7 +40,7 @@
                         <div class="form-group m-0 p-0">
                             <div class="d-flex justify-content-between w-100">
                                 <div class="d-flex align-items-center text-left p-2 w-100">
-                                    <a href='/login' class="btn w-100 bg-white text-home-blue btn-home-hover m-0 no-radius no-box-shadow" style="border: 1px solid #1c5ea4;">
+                                    <a href="{{url('/login')}}" class="btn w-100 bg-white text-home-blue btn-home-hover m-0 no-radius no-box-shadow" style="border: 1px solid #1c5ea4;">
                                         <i class="fas fa-arrow-left"></i>
                                         {{ __('Login') }}
                                     </a>
@@ -56,13 +56,13 @@
                         <hr class="w-100 mt-4 mb-4" />
                         <div class="d-flex text-home-blue justify-content-between">
                             <div class="d-flex align-items-center" style="width: 40%">
-                                <a href='/welcome' class="btn bg-white btn-home-hover text-home-blue no-box-shadow p-2 no-radius" style="border: 1px solid #1c5ea4;">
+                                <a href="{{url('/welcome')}}" class="btn bg-white btn-home-hover text-home-blue no-box-shadow p-2 no-radius" style="border: 1px solid #1c5ea4;">
                                     <i class="fas fa-arrow-left"></i>
                                     Home
                                 </a>
                             </div>
                             <div class="d-flex text-right ">
-                                <a href="/register" class="d-flex align-items-center w-100 text-right ">Nog geen account? Registreer nu</a>
+                                <a href="{{url('/register')}}" class="d-flex align-items-center w-100 text-right ">Nog geen account? Registreer nu</a>
                             </div>
                         </div>
                     </form>

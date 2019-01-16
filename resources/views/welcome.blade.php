@@ -162,10 +162,10 @@ Vanaf 1998 begeeft het bedrijf zich op het uitgeverspad met een nieuwe generatie
     </div>
   </div>
 </div>
-                    <a class="linkColorHover" href="/news">News</a>
-                    <a class="linkColorHover" href="/faq">FAQ</a>
-                    <a class="linkColorHover" href="/scores">Scores</a>
-                    <a class="linkColorHover" href="/admins">Admins</a>
+                    <a class="linkColorHover" href="{{url('/news')}}">News</a>
+                    <a class="linkColorHover" href="{{url('/faq')}}">FAQ</a>
+                    <a class="linkColorHover" href="{{url('/scores')}}">Scores</a>
+                    <a class="linkColorHover" href="{{url('/admins')}}">Admins</a>
                 </div>
             </div>
 

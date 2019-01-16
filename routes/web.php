@@ -25,6 +25,10 @@ Route::get('mail', 'HomeController@mail');
 Route::get('judge', 'HomeController@judge');
 Route::get('projects', 'ProjectsController@index');
 
+Route::resource('/score/{tableid}/', 'ScoreInputController', [
+    'except' => ['delete', 'show', 'store']
+]);
+
 
 Route::post('register', 'Auth\RegisterController@register');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
@@ -34,6 +38,7 @@ Route::get('/error', 'TestController@error');
 Auth::routes();
 
 Auth::routes(['verify' => true]);
+
 
 
 // Check if any user is loged in
@@ -61,6 +66,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::post('/admin/judges/{id}/edit', 'AdminJudgeController@update')->name('admin.post.judges.edit');
 
         Route::post('/admin/add', 'AdminController@store')->name('admin.post.add');
+        Route::resource('/admin/news', 'NewsController');
 
         Route::get('downloadExcel/{roleid}', 'ExcelController@downloadExcel')->name('excel.users');
     });
@@ -73,7 +79,6 @@ Route::get('/judge', 'AccountController@judge');
 Route::post('/register', 'Auth\RegisterController@register');
 
 Route::resource('/judge','JudgeController');
-Route::resource('/admin/news', 'NewsController');
 Route::get('/tableSize', 'TempController@tableSize');
 Route::get('/tournamentPoints', 'TempController@tournamentPoints');
 Route::get('/points', 'TempController@points');
@@ -94,6 +99,3 @@ Route::post('/gamePoints', 'HomeController@assignGamePoints');
 
 Auth::routes(['verify' => true]);
 
-Route::resource('/score/{tableid}', 'ScoreInputController', [
-    'except' => ['delete', 'show', 'store']
-]);

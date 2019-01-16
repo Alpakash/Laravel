@@ -40,15 +40,15 @@
        </div>
     </div>
 
-    <center><a href='welcome'><button class="btn btn-danger form-control">Watch Carcassonne Insights</button></a></center>
+    <center><a href="{{url('/welcome')}}"><button class="btn btn-danger form-control">Watch Carcassonne Insights</button></a></center>
         @if(Auth::user()->isAdmin())
-                        <center><a href='admin'><button class="btn btn-primary form-control">Admin Dashboard</button></a></center>
+                        <center><a href="{{url('/admin')}}"><button class="btn btn-primary form-control">Admin Dashboard</button></a></center>
         @elseif(Auth::user()->isJudge() || Auth::user()->isAdmin())
-                        <center><a href='judge'><button class="btn btn-primary form-control">Judge Page</button></a></center>
+                        <center><a href="{{url('/judge')}}"><button class="btn btn-primary form-control">Judge Page</button></a></center>
                     @endif
 
                         @if(Auth::user()->isAdmin() || Auth::user()->isJudge())
-                            <center><a href='scores'><button class="btn btn-success form-control">Scores invoeren</button></a></center>
+                            <center><a href="{{url('/scores')}}"><button class="btn btn-success form-control">Scores invoeren</button></a></center>
                         @endif
                 </div>
 

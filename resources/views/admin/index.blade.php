@@ -94,7 +94,7 @@
                 <div class="card-body d-sm-flex justify-content-between">
 
                     <h4 class="mb-2 mb-sm-0 d-flex align-items-center text-home-blue">
-                        <a href="https://mdbootstrap.com/docs/jquery/" target="_blank">laatst toegevoegde deelnemers</a>
+                        <a href="#" target="_blank">laatst toegevoegde deelnemers</a>
                     </h4>
                     <div class="d-flex">
                         <a href="{{ route('admin.add') }}" class="btn bg-white btn-home-hover mr-3 text-black-50 btn-sm my-0 p no-radius border-light no-box-shadow" >
@@ -148,12 +148,12 @@
                                             </td>
                                             <td class="d-flex justify-content-start">
                                                 <span class="pencilIcon round-btn mr-3">
-                                                    <a href="/admin/deelnemers/{{$user->id}}" class="btn d-flex justify-content-center align-items-center p-0">
+                                                    <a href="{{route('admin.users', $user->id)}}" class="btn d-flex justify-content-center align-items-center p-0">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
                                                 </span>
                                                 <span class="trashIcon round-btn">
-                                                    <a href="/deelnemers" class="btn d-flex justify-content-center align-items-center p-0">
+                                                    <a href="{{url('/admin/users')}}" class="btn d-flex justify-content-center align-items-center p-0">
                                                        <i class="fas fa-trash-alt"></i>
                                                     </a>
                                                 </span>

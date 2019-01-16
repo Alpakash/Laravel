@@ -32,16 +32,16 @@
 
                         @if(Auth::user()->isAdmin())
                         <li class="nav-item">
-                            <a href="/admin"><button class="btn btn-primary mr-3"> Admin Dashboard</button></a>
+                            <a href="{{url('/admin')}}"><button class="btn btn-primary mr-3"> Admin Dashboard</button></a>
                         </li>
                             @elseif(Auth::user()->isJudge())
                                 <li class="nav-item">
-                                    <a href="/judge"><button class="btn btn-primary mr-3"> Judge Page</button></a>
+                                    <a href="{{url('/judge')}}"><button class="btn btn-primary mr-3"> Judge Page</button></a>
                                 </li>
                         @endif
 
                     <li class="nav-item">
-                         <a href="/profile"><button class="btn btn-success mr-3"> <i class="fas fa-user"></i> Mijn Profiel</button></a>
+                         <a href="{{url('/profile')}}"><button class="btn btn-success mr-3"> <i class="fas fa-user"></i> Mijn Profiel</button></a>
                     </li>
 
 
@@ -50,17 +50,17 @@
                                Menu <span class="caret"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                 <a class="dropdown-item" href="/news">
+                                 <a class="dropdown-item" href="{{url('/news')}}">
                                   <i class="far fa-newspaper"></i>  News
                                 </a>
-                                 <a class="dropdown-item" href="/faq">
+                                 <a class="dropdown-item" href="{{url('/faq')}}">
                                    <i class="fas fa-question"></i> FAQ
                                 </a>
-                                 <a class="dropdown-item" href="/scores">
+                                 <a class="dropdown-item" href="{{url('/scores')}}">
                                   <i class="far fa-star"></i>  Scores
                                 </a>
                                 @if(Auth::user()->isJudge() || Auth::user()->isAdmin())
-                                <a class="dropdown-item" href="/judge">
+                                <a class="dropdown-item" href="{{url('/judge')}}">
                                    <i class="fas fa-crown"></i> Judge
                                 </a>
                                 @endif

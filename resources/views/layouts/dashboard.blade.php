@@ -44,16 +44,16 @@
                                 <i class="fas fa-user"></i>  {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/news">
+                                <a class="dropdown-item" href="{{url('/news')}}">
                                     <i class="far fa-newspaper"></i>  News
                                 </a>
-                                <a class="dropdown-item" href="/faq">
+                                <a class="dropdown-item" href="{{url('/faq')}}">
                                     <i class="fas fa-question"></i> FAQ
                                 </a>
-                                <a class="dropdown-item" href="/scores">
+                                <a class="dropdown-item" href="{{url('/scores')}}">
                                     <i class="far fa-star"></i>  Scores
                                 </a>
-                                <a class="dropdown-item" href="/judge">
+                                <a class="dropdown-item" href="{{url('/judge')}}">
                                     <i class="fas fa-crown"></i> Judge
                                 </a>
 

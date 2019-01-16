@@ -49,7 +49,7 @@ $usersOnTable = count($usersPerTable[$table_id]);
     </div>
 
     </div>
-    <center><a href="/scores"><button class="mb-4 btn btn-primary"><i class="fas fa-angle-left"></i> naar tafels</button></a></center>
+    <center><a href="{{url('/scores')}}"><button class="mb-4 btn btn-primary"><i class="fas fa-angle-left"></i> naar tafels</button></a></center>
 @endsection
 
 

@@ -11,7 +11,7 @@
 
                     <ul class="quick-nav">
                         <li>
-                            <a href="" class="ft-20 text-black-50">
+                            <a href="#" class="ft-20 text-black-50">
                                 <i class="fas fa-home"></i>
                             </a>
                         </li>

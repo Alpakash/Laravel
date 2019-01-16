@@ -13,6 +13,9 @@
                                     <h5 class="mb-0">
                                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#index{{ $news->id }}" aria-expanded="true" aria-controls="index{{ $news->id }}">
                                             {{ $news->title }}
+                                            @if(Auth::user()->isAdmin() || Auth::user()->isJudge())
+                                                <a href='{{url("/admin/news/{$news->id}/edit")}}'><button class="float-right btn btn-warning">Edit artikel</button></a>
+                                            @endif
                                         </button>
                                     </h5>
                                 </div>
