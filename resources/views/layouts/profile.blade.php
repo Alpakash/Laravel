@@ -38,7 +38,7 @@
        <div class="profileLabel"> 
                   <strong>Account created:</strong><p> {{ Auth::user()->created_at }}</p>
        </div>
-    </div>
+    </div>g
 
     <center><a href='/welcome'><button class="btn btn-danger form-control">Watch Carcassonne Insights</button></a></center>
 
