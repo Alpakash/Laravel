@@ -11,8 +11,7 @@
 |
 */
 
-Route::get('/', 'HomeController@index' );
-Route::get('/home', 'HomeController@index' );
+Route::get('/home', 'AccountController@profile' );
 
 Route::get('countdown', 'TestController@response');
 
@@ -64,13 +63,11 @@ Route::group(['middleware' => 'auth'], function(){
         Route::post('/admin/add', 'AdminController@store')->name('admin.post.add');
 
         Route::get('downloadExcel/{roleid}', 'ExcelController@downloadExcel')->name('excel.users');
-
-        // admin judges
     });
 });
-
 Route::get('/welcome', 'TestController@index');
 Route::get('/profile', 'AccountController@profile')->name('home');
+Route::get('/', 'AccountController@profile')->name('home');
 Route::get('/judge', 'AccountController@judge');
 
 Route::post('/register', 'Auth\RegisterController@register');
