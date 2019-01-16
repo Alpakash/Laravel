@@ -17,26 +17,23 @@
                  <div class="profileLabel"><strong>Name:</strong><p> {{ Auth::user()->name }} {{ Auth::user()->lastName }}</p></div>
                     </div>
 
-  <div class="cardBorder">
-                 <div class="profileIcon"> <i class="fas fa-trophy"></i></div>
-                  <div class="profileLabel"><strong>Place:</strong><p> 6th out of the 120 players</p></div>
-  </div>
-
-  <div class="cardBorder">
-      <div class="profileIcon"> <i class="fas fa-list-alt"></i> </div>
-                 <div class="profileLabel"> <strong>Battles:</strong><p> 4 battles played </p></div>
-  </div>
 
    <div class="cardBorder">
        <div class="profileIcon"> <i class="fas fa-forward"></i> </div>
        <div class="profileLabel"> 
-                  <strong>Upcoming match:</strong><p> Henry, Sjaak, Willow and {{ Auth::user()->name }} @ Table 2</p>
+                  <strong>Upcoming match:</strong><p> @foreach($users_table as $key => $tableData)
+                   {{$tableData->name}}@if(count($users_table) != $key+1),@endif
+
+               @endforeach
+
+
+               @ Table {{$users_table[0]->table_id}}</p>
        </div>
    </div>
   <div class="cardBorder">
        <div class="profileIcon"> <i class="fas fa-plus-square"></i> </div>
        <div class="profileLabel"> 
-                  <strong>Account created:</strong><p> {{ Auth::user()->created_at }}</p>
+                  <strong>Account created at:</strong><p> {{ \Carbon\Carbon::parse(Auth::user()->created_at)->format('d-m-Y') }}</p>
        </div>
     </div>
 

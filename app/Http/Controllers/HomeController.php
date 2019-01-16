@@ -21,16 +21,6 @@ class HomeController extends Controller
         $this->middleware(['auth', 'verified']);
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('profile');
-    }
-
     public function mail()
     {
         return view('mails');
@@ -60,7 +50,6 @@ class HomeController extends Controller
             ->get()
             ->toArray();
 
-
         $totalUsers = count($users_table);
         $usersPerTable = $calculation->tablesPreliminaryRoundRandom($users_table, $calculation->tableSize($totalUsers));
 
@@ -75,6 +64,8 @@ class HomeController extends Controller
 
         return view('welcome-links.scores', compact('users_table','totalUsers', 'totalTables', 'usersPerTable'));
     }
+
+
 
     public function generateTables() {
         $calculation = new \App\Calculation();

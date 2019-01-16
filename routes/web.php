@@ -18,8 +18,6 @@ Route::get('countdown', 'TestController@response');
 
 Route::get('error', 'TestController@error');
 
-Route::get('profile', 'HomeController@index');
-
 Route::get('news', 'HomeController@news');
 Route::get('faq', 'HomeController@faq');
 Route::get('scores', 'HomeController@scores');
