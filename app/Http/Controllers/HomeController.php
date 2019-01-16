@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Calculation;
+use App\Dto\StatUser;
 use Illuminate\Http\Request;
 use App\User;
 use App\News;
@@ -79,11 +81,27 @@ class HomeController extends Controller
 
     public function assignGamePoints(Request $request)
     {
+        $users = [];
         foreach ($request->except('_token') as $id => $points) {
-        DB::table('tables_users')
-            ->where('user_id', $id)
-            ->update(['game_points' => $points]);
-       }
+            $users[] = new StatUser($id, $points);
+            /*DB::table('tables_users')
+                ->where('user_id', $id)
+                ->update(['game_points' => $points]);*/
+        }
+        $calculation = new Calculation();
+        $tournamentPoints = $calculation->tournamentPoints(count($users));
+        $users = $calculation->points($users, $tournamentPoints);
+
+        foreach ($users as $user){
+            DB::table('table_users')
+                ->where('user_id', $user->id)
+                ->update(
+                    [
+                        'game_points' => $user->score,
+                        'weight' => $user->weight,
+                        'tournament_points' => $user->tournamentPoints
+                    ]);
+        }
 
         return redirect('/scores');
     }

@@ -132,7 +132,7 @@ class Calculation
                 $sameTournamentPoints = array_slice($tournamentPoints, $i, $i + $sameScoreCount);
                 $averageTournamentPoints = array_sum($sameTournamentPoints) / $sameScoreCount;
 
-                for ($n = $i; $n <= $sameScoreCount; $n++)
+                for ($n = $i; $n < $sameScoreCount; $n++)
                     $this->assignPoints($users, $n, $totalScore, $averageTournamentPoints);
 
                 $i = $n;
@@ -175,7 +175,7 @@ class Calculation
      * @param $users array The users to search in.
      * @param $id int The index of the user to assign the points to.
      * @param $totalScore int The total score of all the table.
-     * @param $tournamentPoint int The tournament points the user should get.
+     * @param $tournamentPoint float The tournament points the user should get.
      */
     private function assignPoints(&$users, $id, $totalScore, $tournamentPoint)
     {
