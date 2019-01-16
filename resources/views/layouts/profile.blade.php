@@ -38,7 +38,7 @@
        <div class="profileLabel"> 
                   <strong>Account created at:</strong><p> {{ \Carbon\Carbon::parse(Auth::user()->created_at)->format('d-m-Y') }}</p>
        </div>
-    </div>g
+    </div>
 
     <center><a href='welcome'><button class="btn btn-danger form-control">Watch Carcassonne Insights</button></a></center>
         @if(Auth::user()->isAdmin())
