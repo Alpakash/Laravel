@@ -209,7 +209,11 @@ class Calculation
 
         $userCount = count($users);
         if ($userCount === 0)
-            throw new \InvalidArgumentException('No users given.');
+            try {
+                return view('layouts.scores');
+            } catch (\Exception $e) {
+            throw new \InvalidArgumentException("No users given. {$e}");
+            }
         if ($userCount !== intval($availableSpace))
             throw new \InvalidArgumentException('There will be an amount of people left over with these table sizes.');
 

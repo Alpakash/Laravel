@@ -60,9 +60,15 @@ class HomeController extends Controller
             ->get()
             ->toArray();
 
+
         $totalUsers = count($users_table);
         $usersPerTable = $calculation->tablesPreliminaryRoundRandom($users_table, $calculation->tableSize($totalUsers));
+
+        if (is_array($usersPerTable)) {
         $totalTables = count($usersPerTable);
+        } else {
+            return back()->with('message', 'There is no round being played at the moment.');
+        }
 
         $usersPerTable = $calculation->tablesPreliminaryRound($users_table, $calculation->tableSize($totalUsers));
 
@@ -93,7 +99,7 @@ class HomeController extends Controller
         $users = $calculation->points($users, $tournamentPoints);
 
         foreach ($users as $user){
-            DB::table('table_users')
+            DB::table('tables_users')
                 ->where('user_id', $user->id)
                 ->update(
                     [

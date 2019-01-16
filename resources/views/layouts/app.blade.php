@@ -7,6 +7,11 @@
 
     @include('layouts.nav')
     <div class="pagesImg">
+        @if(session()->has('message'))
+            <div class="alert alert-success">
+                <center>{{ session()->get('message') }}</center>
+            </div>
+        @endif
     @yield('content')
 
     @include('layouts.scripts')
