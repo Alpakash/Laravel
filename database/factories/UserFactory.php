@@ -13,6 +13,7 @@ use Faker\Generator as Faker;
 |
 */
 
+
 $factory->define(App\User::class, function (Faker $faker) {
     return [
         'name' => $faker->firstName,
@@ -24,3 +25,4 @@ $factory->define(App\User::class, function (Faker $faker) {
         'role_id' => 3,
     ];
 });
+

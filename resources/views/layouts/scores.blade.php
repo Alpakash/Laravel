@@ -19,23 +19,24 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    <ol>
                                     @if(array_has($usersPerTable, $i.'.0'))
                                         <tr>
-                                            <td>{{$usersPerTable[$i][0]->name}}</td>
+                                            <td>1. {{$usersPerTable[$i][0]->name}}</td>
                                             <td>{{$usersPerTable[$i][0]->tournament_points}}</td>
                                         </tr>
                                     @endif
 
                                     @if(array_has($usersPerTable, $i.'.1'))
                                         <tr>
-                                            <td>{{$usersPerTable[$i][1]->name}}</td>
+                                            <td>2. {{$usersPerTable[$i][1]->name}}</td>
                                             <td>{{$usersPerTable[$i][1]->tournament_points}}</td>
                                         </tr>
                                     @endif
 
                                     @if(array_has($usersPerTable, $i.'.2'))
                                         <tr>
-                                            <td>{{$usersPerTable[$i][2]->name}}</td>
+                                            <td>3. {{$usersPerTable[$i][2]->name}}</td>
                                             <td>{{$usersPerTable[$i][2]->tournament_points}}</td>
                                         </tr>
                                     @endif
@@ -43,10 +44,11 @@
                                     {{-- if array has a 4th player, then get the variable--}}
                                     @if(array_has($usersPerTable, $i.'.3'))
                                         <tr>
-                                            <td>{{$usersPerTable[$i][3]->name}}</td>
+                                            <td>4. {{$usersPerTable[$i][3]->name}}</td>
                                             <td>{{$usersPerTable[$i][3]->tournament_points}}</td>
                                         </tr>
                                     @endif
+                                    </ol>
                                     </tbody>
                                 </table>
 
