@@ -89,7 +89,8 @@ class NewsController extends Controller
         $news = News::findOrFail($id);
         $input = $request->all();
         $news->fill($input)->save();
-        return redirect()->route('news.index')->with('msg-success','successfully updated.');
+        return redirect(url('/news'))->with('msg-success', 'successfully updated.');
+
     }
 
     /**
@@ -100,8 +101,8 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        $news = User::findOrFail($id);
+        $news = News::findOrFail($id);
         $news->delete();
-        return redirect()->route('news.index')->with('msg-success','successfully Removed.');
+        return redirect(url('/news'))->with('msg-success','successfully Removed.');
     }
 }

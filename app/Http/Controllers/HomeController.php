@@ -54,13 +54,12 @@ class HomeController extends Controller
         $usersPerTable = $calculation->tablesPreliminaryRoundRandom($users_table, $calculation->tableSize($totalUsers));
 
         if (is_array($usersPerTable)) {
-        $totalTables = count($usersPerTable);
+            $totalTables = count($usersPerTable);
         } else {
             return back()->with('message', 'There is no round being played at the moment.');
         }
 
         $usersPerTable = $calculation->tablesPreliminaryRound($users_table, $calculation->tableSize($totalUsers));
-
 
         return view('welcome-links.scores', compact('users_table','totalUsers', 'totalTables', 'usersPerTable'));
     }
@@ -73,6 +72,18 @@ class HomeController extends Controller
         $calculation->generateTables();
 
 
+        // select the last row in the db by reversing the rows
+        $countdown = \App\Countdown::orderBy("created_at", "desc")->first();
+        if(isset($countdown)) {
+        // Get the by judge filled in round_minutes and multiply by 60 for seconds
+        $countdown->resumed_seconds = $countdown->round_minutes * 60;
+        // make a new timestamp for created at
+        $countdown->created_at = now();
+        // set pause_timer to 0, show the first pause button
+        $countdown->pause_timer = 0;
+
+        $countdown->save();
+        }
         return redirect('/scores');
     }
 

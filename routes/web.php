@@ -17,7 +17,7 @@ Route::get('countdown', 'TestController@response');
 
 Route::get('error', 'TestController@error');
 
-Route::get('news', 'HomeController@news');
+Route::get('news', 'HomeController@news')->name('news.index');
 Route::get('faq', 'HomeController@faq');
 Route::get('scores', 'HomeController@scores');
 Route::get('admins', 'HomeController@admins');

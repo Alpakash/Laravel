@@ -3,7 +3,7 @@
 @section('content')
     <h1 class="title">Edit Project</h1>
 
-    <form action="/projects/{{ $project->id }}" method="POST">
+    <form action="{{ url('/projects/'){$project->id} }}" method="POST">
         @method('PATCH')
         @csrf
         <div class="field">
@@ -32,7 +32,7 @@
     </form>
 
     <br>
-    <form action="/projects/{{ $project->id }}" method="POST">
+    <form action="{{ url('/projects/'){$project->id} }}" method="POST">
         @method('DELETE')
         @csrf
 

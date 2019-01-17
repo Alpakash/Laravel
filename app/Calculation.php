@@ -249,7 +249,7 @@ class Calculation
     public function generateTables() {
         $calculation = new \App\Calculation();
 
-        $users = User::all()->toArray();
+        $users = User::where('role_id', 3)->get()->toArray();
         $allUsers = [];
 
         foreach ($users as $user) {
@@ -264,7 +264,8 @@ class Calculation
 
         for($i=0; $i < $totalTables; $i++) {
             foreach($usersPerTable[$i] as $users_id) {
-                DB::table('tables_users')->insert([
+                DB::table('tables_users')
+                    ->insert([
                     ['table_id' => ($i+1), 'user_id' => $users_id]
                 ]);
             }

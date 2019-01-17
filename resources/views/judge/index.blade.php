@@ -8,7 +8,7 @@
 				<strong>Generate knop</strong>
 			</div>
 			<div class="card-body ">
-		<form action="/generateRound" method="post">
+		<form action="{{ url('/generateRound') }}" method="post">
 			@csrf
 			<center><input onclick="return confirm('Wil je de eerste ronde genereren?');" class="btn btn-success" type="submit" value="Genereer de eerste ronde"></center>
 		</form>

@@ -17,11 +17,13 @@
                  <div class="profileLabel"><strong>Name:</strong><p> {{ Auth::user()->name }} {{ Auth::user()->lastName }}</p></div>
                     </div>
 
-
    <div class="cardBorder">
        <div class="profileIcon"> <i class="fas fa-forward"></i> </div>
        <div class="profileLabel">
-               <strong>Upcoming match:</strong><p>
+
+               <strong>Upcoming match:</strong>
+           <p>
+               @isset($users_table)
                @foreach($users_table as $key => $tableData)
                    {{$tableData->name}}@if(count($users_table) != $key+1),@endif
                @endforeach
@@ -29,7 +31,11 @@
                @isset($users_table[0]) @ Table {{$users_table[0]->table_id}}
 
                @else No upcoming match @endisset
-               </p>
+
+               @else
+                   No upcoming match
+                   @endisset
+           </p>
 
        </div>
    </div>

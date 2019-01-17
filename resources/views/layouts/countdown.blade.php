@@ -49,7 +49,7 @@ if($countdownExist){
 
         // Output the result in an element with id="countdown"
         @if ($countdownExist && ($countdown->pause_timer > 1 || $countdown->pause_timer == null))
-            document.getElementById("countdown").innerHTML = "<strong>Time Left: </strong>" +
+            document.getElementById("countdown").innerHTML = "<strong>Tijd over: </strong>" +
             minutes + ":" + seconds;
         @endif
 

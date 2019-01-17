@@ -13,9 +13,6 @@
                                     <h5 class="mb-0">
                                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#index{{ $news->id }}" aria-expanded="true" aria-controls="index{{ $news->id }}">
                                             {{ $news->title }}
-                                            @if(Auth::user()->isAdmin() || Auth::user()->isJudge())
-                                                <a href='{{url("/admin/news/{$news->id}/edit")}}'><button class="float-right btn btn-warning">Edit artikel</button></a>
-                                            @endif
                                         </button>
                                     </h5>
                                 </div>
@@ -25,7 +22,22 @@
                                     <div class="card-body">
 
                                         <strong style="text-align: right">{{ $news->created_at }}</strong>
-                                        <p> {{ $news->desc }}</p>                                    </div>
+                                        <p> {{ $news->desc }}</p>
+                                        @if(Auth::user()->isAdmin() || Auth::user()->isJudge())
+
+                                        <span style="display: inline-block">
+                                            <a href='{{url("/admin/news/{$news->id}/edit")}}'>
+                                                    <button style="display: inline-block" class="float-left btn btn-warning">Edit artikel</button>
+                                                </a>
+
+                                               <form style="display: inline-block" action="{{url("/admin/news/{$news->id}")}}" method="post">
+                                                    @csrf
+                                                   @method('delete')
+                                                    <input type="submit" value="DELETE" class="btn mt-2 btn-sm btn-danger">
+                                                </form>
+                                        </span>
+                                        @endif
+                                    </div>
                                 </div>
                     @endforeach
                             </div>
@@ -36,7 +48,7 @@
 
         </div>
             @if(Auth::user()->isAdmin() || Auth::user()->isJudge())
-     <center><a href="/admin/news/create"><button class="mt-5 btn btn-primary">Creëer artikel</button></a></center>
+     <center><a href="{{url('/admin/news/create')}}"><button class="mt-5 btn btn-primary">Creëer artikel</button></a></center>
             @endif
  </div>
 

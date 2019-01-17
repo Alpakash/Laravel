@@ -37,7 +37,7 @@
                     @else
 
                         <li class="nav-item">
-                            <a href="/"><button class="btn btn-danger mr-3"><i class="fa fa-book"></i> Profile</button></a>
+                            <a href="{{url('/profile')}}"><button class="btn btn-danger mr-3"><i class="fa fa-book"></i> Profiel</button></a>
                         </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class=" dropdown-toggle btn btn-warning" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

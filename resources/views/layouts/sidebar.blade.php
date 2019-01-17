@@ -23,7 +23,7 @@
         <hr class="w-100 mt-0 mb-4" />
         <div id="sidebar-list" class="list-group list-group-flush">
 
-            <a href="{{ route('admin') }}" class="list-group-item bg-home pt-2 pb-2 no-radius text-white box-shadow">
+            <a href="{{ route('admin') }}" class="list-group-item list-group-item-action">
                 <i class="fa fa-pie-chart mr-3"></i>Admin Dashboard
             </a>
             <a href="{{ route('admin.users') }}" class="list-group-item list-group-item-action">
@@ -46,9 +46,9 @@
                 </div>
             </div>
             <div class="d-flex justify-content-between">
-                <a class="border-light home-hover d-flex flex-column justify-content-center align-items-center w-100 p-3 toggle-text" href="">
+                <a class="border-light home-hover d-flex flex-column justify-content-center align-items-center w-100 p-3 toggle-text" href="{{url('/profile')}}">
                     <i class="fas fa-cog"></i>
-                    <span class="ft-15 p-2">account</span>
+                    <span class="ft-15 p-2">Profiel</span>
                 </a>
                 <a class="border-light home-hover d-flex flex-column justify-content-center align-items-center w-100 p-3 toggle-text" href="{{url('/logout')}}">
                     <i class="fas fa-power-off"></i>

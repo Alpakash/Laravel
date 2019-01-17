@@ -7,10 +7,10 @@
   <title>Projects</title>
 </head>
 <body>
-  
+
   <h1>Create a new Project</h1>
 
-<form action="/projects" method="POST">
+<form action="{{ url("/projects") }}" method="POST">
 
     {{ csrf_field() }}
   <div>

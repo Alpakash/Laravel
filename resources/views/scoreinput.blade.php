@@ -8,7 +8,7 @@ $usersOnTable = count($usersPerTable[$table_id]);
 
 
         <center><h1 class="pt-4 mb-5">Tafel {{$usersPerTable[$table_id][0]->table_id}} / Ronde 1</h1></center>
-        <form action="/gamePoints" method="post">
+        <form action="{{ url("/gamePoints") }}" method="post">
             @csrf
         <div class="row">
 
