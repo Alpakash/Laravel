@@ -8,7 +8,9 @@ Om het project werkende te krijgen zijn er maar een paar kleine stappen nodig.
 
 1. composer install
 2. npm install
-3. php artisan db:seed
+3. php artisan migrate
+4. php artisan db:seed
+5. php artisan serve
 
 accounts voor diverse rollen:
 admin@admin.nl
