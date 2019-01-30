@@ -1,0 +1,28 @@
+.card-header {
+    text-align: center;
+    font-weight: 600;
+}
+
+.profileIcon {
+    font-size: 40px;
+    display: flex;
+    float: right;
+}
+
+.profileIcon:hover {
+    color: #aa0f00;
+}
+
+.game-hover:hover {
+    background-color: rgba(250, 250, 250, 0.5);
+}
+
+.game-hover {
+    padding-top: 20px;
+}
+
+a.game-overview:link {
+    text-decoration: none;
+}
+
+a.game-overview:hover {color:#ffcc00;}
